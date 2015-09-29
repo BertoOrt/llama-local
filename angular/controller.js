@@ -3,12 +3,18 @@ app.controller('home', ['$scope', function ($scope) {
 }])
   .directive('myMap', function () {
     function link(scope, element, attrs) {
-      var basic_choropleth = new Datamap({
+      new Datamap({
         element: element[0],
         projection: 'mercator',
         fills: {
-          defaultFill: "#ABDDA4",
-          authorHasTraveledTo: "#fa0fa0"
+          defaultFill: "#A39BA8",
+          authorHasTraveledTo: "#B8C5D6",
+          highlightFillColor: "#B8C5D6"
+        },
+        done: function(datamap) {
+          datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+              alert(geography.properties.name);
+          });
         },
         data: {
           USA: { fillKey: "authorHasTraveledTo" },
@@ -20,17 +26,6 @@ app.controller('home', ['$scope', function ($scope) {
         }
       });
       var colors = d3.scale.category10();
-      window.setInterval(function() {
-        basic_choropleth.updateChoropleth({
-          USA: colors(Math.random() * 10),
-          RUS: colors(Math.random() * 100),
-          AUS: { fillKey: 'authorHasTraveledTo' },
-          BRA: colors(Math.random() * 50),
-          CAN: colors(Math.random() * 50),
-          ZAF: colors(Math.random() * 50),
-          IND: colors(Math.random() * 50),
-        });
-      }, 2000);
 
     }
 
