@@ -1,3 +1,37 @@
-body {
-  background: orange;
+.container {
+  width: 960px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.landing {
+  background:
+        linear-gradient(to bottom, rgba($pri, .3), rgba($white, .5)),
+        url('./images/bg.jpg');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
+.nav {
+  width: 100%;
+  .title {
+    float:left;
+    display: inline-block;
+  }
+  .nav-tabs {
+    float: right;
+    display: inline-block;
+    margin: 2%;
+    font-weight: bold;
+    font-size: 110%;
+  }
+  .tabs {
+    margin: 10px;
+  }
+}
+
+.map {
+  width: 80%;
+  height: 400px;
 }
