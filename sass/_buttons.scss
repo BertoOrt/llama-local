@@ -1,0 +1,76 @@
+input[type='submit'], input[type=button], button, a.button {
+  width: 100px;
+  min-width: 16%;
+  height: 40px;
+  border: 3px solid rgba($black, 0.3);
+  color: $black;
+  margin-top: 1%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.startSearch {
+  padding: 5px;
+  background-color: rgba($pri, 0.3);
+  width: 100px;
+  min-width: 16%;
+  height: 30px;
+  border: 3px solid rgba($black, 0.3);
+  color: $white;
+  margin-top: 1%;
+  display: inline-block;
+  vertical-align: middle;
+  transition: all 1s ease;
+}
+
+.startSearch:focus {
+  color: $black;
+  border-radius: 10px;
+  width: 300px;
+  height: 3em;
+  background-color: $white;
+}
+
+.submit {
+  background: rgba($pri, 0.7);
+}
+
+.edit {
+  background: rgba($sec, 0.7);
+}
+
+.delete {
+  color: white;
+  background: rgba($ter, 0.7);
+}
+
+.show {
+  color: white;
+  background: rgba($ter, 0.7);
+}
+
+input[type='submit']:hover , input[type='button']:hover, button:hover, a.button {
+  color: white;
+  border: 3px solid rgba($black, 0.8);
+}
+
+.submit:hover {
+  background: $pri;
+}
+
+.edit:hover {
+  background: $sec;
+}
+
+.delete:hover {
+  background: $ter;
+}
+
+.show:hover {
+  background: $ter;
+}
+
+input[type='submit']:active , input[type='button']:active, button:active, a.button {
+  color: gray;
+  border: 3px solid $black;
+}

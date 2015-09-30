@@ -21,7 +21,7 @@
         borderWidth: 1,
         borderColor: '#FDFDFD',
         popupTemplate: function(geography, data) {
-          return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
+          return '<div class="hoverinfo">SHOW!<strong>' + data + geography.properties.name + '</strong></div>';
         },
         popupOnHover: true,
         highlightOnHover: true,

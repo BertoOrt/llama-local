@@ -11,7 +11,7 @@ gulp.task('js', function () {
   return gulp.src('angular/*js')
     .pipe(concat('all.min.js'))
     .pipe(babel())
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('dist'));
 })
 
