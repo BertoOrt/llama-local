@@ -9,7 +9,7 @@ var map = new Datamap({
   },
   done: datamap => {
     datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-        alert(geography.properties.name);
+        window.location.href = '/search?country=' + geography.properties.name.replace(/ /g, "-").toLowerCase()
     });
   },
   data: {

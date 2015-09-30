@@ -1,12 +1,13 @@
+.nav
+  .container
+    .title
+      a(href='/')
+        img(class='logo', src='./images/llama.png')
+    .nav-tabs
+      a(class='tabs' href='/signup') Join
+      a(class='tabs' href='#') Log In
 .landing
   .container
-    .nav
-      .title
-        a(href='/')
-          img(class='logo', src='./images/llama.png')
-      .nav-tabs
-        a(class='tabs' href='/search') Join
-        a(class='tabs' href='/login') Log In
     .intro
       h1 Find a guide. Be a guide.
       | Imagine having a friend in every country of the world. Now you can.
@@ -14,16 +15,20 @@
       | Here you will find llamas all over the world that will offer you tips
       | on where to stay, what to eat, what to do and what not to do.
       br
-      | Interested?
+      | Check it out.
       br
       | Where would you like to go?
-    input(class="startSearch" type="text" placeholder="Search Country")
+    form(action="/search" method="get")
+      input(class="startSearch" name="country" type="text" placeholder="Search Country")
 h1.mapTitle Find A Llama
 #map
 .footer
   .container
-    .nav
+    .footerNav
+      .title
+        i(class="fa fa-copyright")
+        |  Local Llamas
       .nav-tabs
-        a(class='tabs' href='/search') Join
-        a(class='tabs' href='/login') Log In
+        a(class='tabs' href='/signup') Join
+        a(class='tabs' href='#') Log In
 script(src='/map/allmap.min.js')

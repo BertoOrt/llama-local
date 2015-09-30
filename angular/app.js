@@ -6,6 +6,14 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl: 'partials/home.html',
         controller: 'home'
       })
+      .when('/signup', {
+        templateUrl: 'partials/signup.html',
+        controller: 'signup'
+      })
+      .when('/search', {
+        templateUrl: 'partials/search.html',
+        controller: 'search'
+      })
       .when('/:user', {
         templateUrl: 'partials/user.html',
         controller: 'user'
