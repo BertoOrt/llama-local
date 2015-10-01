@@ -9,10 +9,21 @@
   .container
     .signup.ui.grid
       .info.sixteen.wide.tablet.eight.wide.computer.column
-        | hello
+        h2 Why?
+        div
+          | Local Llamas allows you to build your own web page:
+          ul
+            li Show who you are
+            li Connect with people all over the world
+            li Offer touring services or free advice
+            li Add a blog
+            li Create your own world map and more
+          | Help unite the world and make a more friendly place.
+        .center
+          i.globe.icon
       .formBox.sixteen.wide.tablet.eight.wide.computer.column
         .input
-          h3 Connect
+          h3 Become A LLama
           form.ui.form(action='/login' method='/post')
             .field
               input.full(type='text', name='email', placeholder='Email')
