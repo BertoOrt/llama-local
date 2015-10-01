@@ -14,11 +14,17 @@
   background-color: $pri;
 }
 
-i.globe {
-  font-size: 700%;
-}
-
 .center {
   width: 100%;
   text-align: center;
+}
+
+.profileImage {
+  width: 200px;
+  height: 200px;
+  margin: 1em auto;
+  background-image: url("https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg");
+  background-size: cover;
+  border-radius: 10px;
+  border: 3px solid $cuar;
 }

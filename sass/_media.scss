@@ -20,6 +20,12 @@
       height: 70%;
     }
   }
+  button.collapsedMenu {
+    display: inline-block;
+  }
+  .tabular.menu.fullScreen {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 530px) {

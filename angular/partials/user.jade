@@ -1,1 +1,133 @@
-h1 User Page
+button.collapsedMenu(ng-click="sidebar()") &#9776;
+.ui.left.sidebar.vertical.menu
+  .ui.vertical.fluid.tabular.menu
+    .profile
+      .profileImage
+    h3 LLama
+    a.item.active(ng-click="sidebar()" data-tab="bio")
+      | Bio
+    a.item(ng-click="sidebar()" data-tab="badges")
+      | Badges
+    a.item(ng-click="sidebar()" data-tab="packages")
+      | Packages
+    a.item(ng-click="sidebar()" data-tab="blog")
+      | Blog
+    a.item(ng-click="sidebar()" data-tab="world")
+      | My World
+    a.item(ng-click="sidebar()" data-tab="settings")
+      | Settings
+a(href='/')
+  img(class='profileLogo', src='./images/llama.png')
+.ui.grid
+  .four.wide.column
+    .ui.vertical.fluid.tabular.menu.fullScreen
+      .profile
+        .profileImage
+      h3.profileName LLama
+      a.item.active(ng-mouseover="tab()" data-tab="bio")
+        | Bio
+      a.item(ng-mouseover="tab()" data-tab="badges")
+        | Badges
+      a.item(ng-mouseover="tab()" data-tab="packages")
+        | Packages
+      a.item(ng-mouseover="tab()" data-tab="blog")
+        | Blog
+      a.item(ng-mouseover="tab()" data-tab="world")
+        | My World
+      a.item(ng-mouseover="tab()" data-tab="settings")
+        | Settings
+  .twelve.wide.stretched.column
+    .ui.tab.active(data-tab="bio")
+      | This is me
+    .ui.tab(data-tab="badges")
+      | These are my reviews
+    .ui.tab(data-tab="packages")
+      | This is what I offer
+    .ui.tab(data-tab="blog")
+      .ui.feed
+        .event
+          .label
+            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+          .content
+            .summary
+              a.user
+                | Elliot Fu
+              |  added you as a friend
+              .date
+                | 1 Hour Ago
+            .meta
+              a.like
+                i.like.icon
+                |  4 Likes
+        .event
+          .label
+            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+          .content
+            .summary
+              a Helen Troy
+              |  added 
+              a 2 new illustrations
+              .date
+                | 4 days ago
+            .extra.images
+              a
+                img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Before_Machu_Picchu.jpg/300px-Before_Machu_Picchu.jpg')
+              a
+                img(src='https://upload.wikimedia.org/wikipedia/commons/7/7e/Machu_Picchu_early_morning.JPG')
+            .meta
+              a.like
+                i.like.icon
+                |  1 Like
+        .event
+          .label
+            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+          .content
+            .summary
+              a.user
+                | Jenny Hess
+              |  added you as a friend
+              .date
+                | 2 Days Ago
+            .meta
+              a.like
+                i.like.icon
+                |  8 Likes
+        .event
+          .label
+            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+          .content
+            .summary
+              a Joe Henderson
+              |  posted on his page
+              .date
+                | 3 days ago
+            .extra.text
+              | Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even if we don't run extra laps that day, we surely will come back for more of the same another day soon.
+            .meta
+              a.like
+                i.like.icon
+                |  5 Likes
+        .event
+          .label
+            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+          .content
+            .summary
+              a Justen Kitsune
+              |  added 
+              a 2 new photos
+              |  of you
+              .date
+                | 4 days ago
+            .extra.images
+              a
+                img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Before_Machu_Picchu.jpg/300px-Before_Machu_Picchu.jpg')
+              a
+                img(src='https://upload.wikimedia.org/wikipedia/commons/7/7e/Machu_Picchu_early_morning.JPG')
+            .meta
+              a.like
+                i.like.icon
+                |  41 Likes
+    .ui.tab(data-tab="world")
+      | This is my world
+    .ui.tab(data-tab="settings")
+      | These are my settings

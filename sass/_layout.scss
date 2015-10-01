@@ -93,7 +93,11 @@ body {
   height: 600px;
   padding-top: 10em;
   margin: 0 auto;
+  i.globe {
+    font-size: 700%;
+  }
   .info {
+    padding-left: 2em;
     border-radius: 10px 0 0 10px;
     background-color: rgba($sec, .8);
     height: 100%;
@@ -113,4 +117,29 @@ body {
       padding-top: 1em;
     }
   }
+}
+
+.profile {
+  width: 100%;
+  height: 200px;
+}
+
+.profileLogo {
+  position: absolute;
+  bottom: 20px;
+  left: 23px;
+  width: 40px;
+  height: 35px;
+}
+
+.profileName {
+  text-align: center;
+}
+
+.sidebar {
+  z-index: 1001;
+}
+
+.tab {
+  padding: 2em;
 }

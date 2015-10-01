@@ -31,4 +31,12 @@ app.controller('search', ['$scope', function ($scope) {
 
 app.controller('user', ['$scope', function ($scope) {
   $scope.message = 'apple';
+  $scope.tab = function () {
+    $('.tabular.menu .item').tab();
+  };
+  $scope.sidebar = function () {
+    $('.tabular.menu .item').tab();
+    $('.ui.sidebar')
+    .sidebar('toggle')
+  }
 }])
