@@ -5,21 +5,23 @@
         img(class='logo', src='./images/llama.png')
     .nav-tabs
       a(class='tabs' href='/signup') Join
-      a(class='tabs' href='#') Log In
+      a#login(class='tabs' href='#') Log In
 .landing
   .container
     .intro
-      h1 Find a guide. Be a guide.
-      | Imagine having a friend in every country of the world. Now you can.
-      br
-      | Here you will find llamas all over the world that will offer you tips
-      | on where to stay, what to eat, what to do and what not to do.
-      br
-      | Check it out.
-      br
-      | Where would you like to go?
-    form(action="/search" method="get")
-      input(class="startSearch" name="country" type="text" placeholder="Search Country")
+      h1 Find a guide.
+      h1 Be a guide.
+      div.text
+        | Imagine having a friend in every country of the world. Now you can.
+        br
+        | Here you will find llamas all over the world that will offer you tips
+        | on where to stay, what to eat, what to do and what not to do.
+        br
+        | Check it out.
+        br
+        | Where would you like to go?
+      form(action="/search" method="get")
+        input(class="startSearch" name="country" type="text" placeholder="Search Country")
 h1.mapTitle Find A Llama
 #map
 .footer
@@ -31,4 +33,26 @@ h1.mapTitle Find A Llama
       .nav-tabs
         a(class='tabs' href='/signup') Join
         a(class='tabs' href='#') Log In
+.ui.basic.modal
+  i.close.icon
+  .header
+    | Log in
+  .image.content
+    .image
+      i.cloud.icon
+    .description
+      form.ui.form(action='/login' method='/post')
+        .field
+          input.full(type='text', name='email', placeholder='Email')
+        .field
+          input.full(type='password', name='password', placeholder='Password')
+        button.ui.green.inverted.basic.button(type='submit') Submit
+  .actions
+    .two.fluid.ui.inverted.buttons
+      .ui.facebook.button
+        i.facebook.icon
+        |         Facebook
+      .ui.instagram.button
+        i.instagram.icon
+        |         Instagram
 script(src='/map/allmap.min.js')

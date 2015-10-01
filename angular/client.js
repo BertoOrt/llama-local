@@ -4,13 +4,14 @@ $(document).ready(function() {
       $('.nav').addClass('navbar-fixed');
       $('.logo').css('width', '35px')
       $('.logo').css('height', '30px')
-      $('.nav-tabs').css('padding', '1%')
+      $('.nav-tabs').css('padding-top', '1%')
     }
     if ($(window).scrollTop() < 80) {
       $('.nav').removeClass('navbar-fixed');
       $('.logo').css('width', '60px')
       $('.logo').css('height', '50px')
-      $('.nav-tabs').css('padding', '2%')
+      $('.nav-tabs').css('padding-top', '2%')
     }
   });
+  
 });

@@ -45,3 +45,8 @@ var map = new Datamap({
 $(window).on('resize', function() {
    map.resize();
 });
+
+$('#login').click(function () {
+  $('.ui.basic.modal')
+  .modal('show');
+})
