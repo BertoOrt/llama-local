@@ -19,6 +19,7 @@
     "topojson": "~1.6.19",
     "d3": "~3.5.6",
     "bootstrap": "~3.3.5",
-    "font-awesome": "~4.4.0"
+    "font-awesome": "~4.4.0",
+    "particles.js": "~2.0.0"
   }
 }

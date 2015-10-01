@@ -16,6 +16,15 @@ body {
   width: 100%;
 }
 
+.loginLanding {
+  background:
+        linear-gradient(to bottom, rgba($pri, .3), rgba($sec, .4)),
+        url('./images/girl.jpg');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
 .nav {
   .title {
     float:left;
@@ -78,4 +87,30 @@ body {
   position: fixed;
   width: 100%;
   background-color: rgba($sec, .9);
+}
+
+.ui.grid.signup {
+  height: 600px;
+  padding-top: 10em;
+  margin: 0 auto;
+  .info {
+    border-radius: 10px 0 0 10px;
+    background-color: rgba($sec, .8);
+    height: 100%;
+  }
+  .formBox {
+    border-radius: 0 10px 10px 0;
+    background-color: rgba($sec, .8);
+    height: 100%;
+    .input {
+      width: 100%;
+      height: 70%;
+    }
+    .oauth {
+      width: 100%;
+      height: 30%;
+      text-align: center;
+      padding-top: 1em;
+    }
+  }
 }

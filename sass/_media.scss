@@ -8,6 +8,18 @@
   .footer, #map, .mapTitle {
     display: none;
   }
+  .signup.ui.grid {
+    width: 95%;
+    height: 650px;
+    padding-top: 5em;
+    .info {
+      display: none;
+    }
+    .formBox {
+      border-radius: 10px;
+      height: 70%;
+    }
+  }
 }
 
 @media screen and (max-width: 530px) {

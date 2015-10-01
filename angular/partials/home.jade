@@ -5,7 +5,7 @@
         img(class='logo', src='./images/llama.png')
     .nav-tabs
       a(class='tabs' href='/signup') Join
-      a#login(class='tabs' href='#') Log In
+      a(ng-click="modal()" class='tabs' href='#') Log In
 .landing
   .container
     .intro
@@ -24,6 +24,7 @@
         input(class="startSearch" name="country" type="text" placeholder="Search Country")
 h1.mapTitle Find A Llama
 #map
+#particles-js
 .footer
   .container
     .footerNav
@@ -31,8 +32,12 @@ h1.mapTitle Find A Llama
         i(class="fa fa-copyright")
         |  Local Llamas
       .nav-tabs
-        a(class='tabs' href='/signup') Join
-        a(class='tabs' href='#') Log In
+        a( href='http://github.com/bertoort/llama-local') 
+          i.tabs.github.icon 
+          | Repo
+        a( href='http://bertoort.com') 
+          i.tabs.globe.icon
+          | Author
 .ui.basic.modal
   i.close.icon
   .header
@@ -40,7 +45,7 @@ h1.mapTitle Find A Llama
   .image.content
     .image
       i.cloud.icon
-    .description
+    .description(style="width: 100%")
       form.ui.form(action='/login' method='/post')
         .field
           input.full(type='text', name='email', placeholder='Email')

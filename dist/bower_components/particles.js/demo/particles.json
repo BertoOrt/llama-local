@@ -1,53 +1,4 @@
-var map = new Datamap({
-  element: document.getElementById('map'),
-  projection: 'mercator',
-  responsive: true,
-  fills: {
-    defaultFill: "#A39BA8",
-    authorHasTraveledTo: "#B8C5D6",
-    highlightFillColor: "#B8C5D6"
-  },
-  done: datamap => {
-    datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-        window.location.href = '/search?country=' + geography.properties.name.replace(/ /g, "-").toLowerCase()
-    });
-  },
-  data: {
-    USA: { fillKey: "authorHasTraveledTo", llamas: "1"},
-    JPN: { fillKey: "authorHasTraveledTo", llamas: "1" },
-    ITA: { fillKey: "authorHasTraveledTo", llamas: "1" },
-    CRI: { fillKey: "authorHasTraveledTo", llamas: "2" },
-    KOR: { fillKey: "authorHasTraveledTo", llamas: "1" },
-    DEU: { fillKey: "authorHasTraveledTo", llamas: "1" },
-  },
-  geographyConfig: {
-    highlightBorderColor: '#7d7d7d',
-    highlightBorderWidth: 1,
-    popupTemplate: (geo, data) => {
-        if (!data) {
-          data = {llamas: 0}
-          var llama = "llamas"
-        } else {
-          if (data.llamas == 1) {
-            var llama = "llama"
-          } else {
-            var llama = "llamas"
-          }
-        }
-        return ['<div class="hoverinfo"><strong>',
-          geo.properties.name, "<br>", data.llamas,
-            ' ', llama,
-            '</strong></div>'].join('');
-    }
-  }
-});
-
-$(window).on('resize', function() {
-   map.resize();
-});
-
-
-particlesJS("particles-js", {
+{
   "particles": {
     "number": {
       "value": 80,
@@ -85,7 +36,7 @@ particlesJS("particles-js", {
       }
     },
     "size": {
-      "value": 3,
+      "value": 5,
       "random": true,
       "anim": {
         "enable": false,
@@ -108,7 +59,6 @@ particlesJS("particles-js", {
       "random": false,
       "straight": false,
       "out_mode": "out",
-      "bounce": false,
       "attract": {
         "enable": false,
         "rotateX": 600,
@@ -121,7 +71,7 @@ particlesJS("particles-js", {
     "events": {
       "onhover": {
         "enable": true,
-        "mode": "grab"
+        "mode": "repulse"
       },
       "onclick": {
         "enable": true,
@@ -131,7 +81,7 @@ particlesJS("particles-js", {
     },
     "modes": {
       "grab": {
-        "distance": 140,
+        "distance": 400,
         "line_linked": {
           "opacity": 1
         }
@@ -144,8 +94,7 @@ particlesJS("particles-js", {
         "speed": 3
       },
       "repulse": {
-        "distance": 200,
-        "duration": 0.4
+        "distance": 200
       },
       "push": {
         "particles_nb": 4
@@ -155,5 +104,13 @@ particlesJS("particles-js", {
       }
     }
   },
-  "retina_detect": true
-});
+  "retina_detect": true,
+  "config_demo": {
+    "hide_card": false,
+    "background_color": "#b61924",
+    "background_image": "",
+    "background_position": "50% 50%",
+    "background_repeat": "no-repeat",
+    "background_size": "cover"
+  }
+}

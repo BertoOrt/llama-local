@@ -13,5 +13,4 @@ $(document).ready(function() {
       $('.nav-tabs').css('padding-top', '2%')
     }
   });
-  
 });
