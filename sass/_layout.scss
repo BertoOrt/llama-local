@@ -129,15 +129,19 @@
   text-align: center;
 }
 
-// .sidebar {
-//   z-index: 1001;
-// }
-
 .tab {
   padding: 2em;
 }
 
-.ui.feed {
+.ui.tab.display {
   height: 87vh;
   overflow: scroll;
+}
+
+.profile td {
+  padding-right: 1em;
+}
+
+.profile {
+  height: auto;
 }

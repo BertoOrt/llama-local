@@ -81,8 +81,9 @@ button.collapsedMenu {
   left: 5px;
   top: 5px;
   width: 30px;
-  background: none;
+  background: white;
   border-radius: 10px;
   border: 1px solid #666;
   display: none;
+  z-index: 2000;
 }

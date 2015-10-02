@@ -41,9 +41,41 @@ a(href='/')
       a.item(ng-mouseover="tab()" data-tab="settings")
         | Settings
   .twelve.wide.computer.sixteen.wide.tablet.stretched.column
-    .ui.tab(data-tab="bio")
-      | This is me
-    .ui.tab(data-tab="badges")
+    .ui.tab.display(data-tab="bio")
+      .ui.sixteen.column.grid
+        .row
+          h2 Save the Cheerleader, Save the World
+        .row
+          .sixteen.wide.column.profile
+            table
+              tr
+                td
+                  h4 Name: 
+                td 
+                  | Roberto
+                td
+              tr
+                td
+                  h4 Country:
+                td 
+                  | Venezuela
+              tr
+                td
+                  h4 Languages:
+                td 
+                  | Spanish, English, and Italian
+              tr
+                td
+                  h4 Contact:
+                td 
+                  | berto.ort@gmail.com | 303.956.5777
+              tr
+                td
+                  h4 About me:
+        .row
+          .sixteen.wide.column
+            .ui.segment Hi, I am awesome. Let me show you.
+    .ui.tab.display(data-tab="badges")
       h3 These are my reviews
       i.coffee.icon
       i.food.icon
@@ -88,7 +120,7 @@ a(href='/')
                 | Jenny is a student studying Media Management at 
                 a the New School
                 | .
-    .ui.tab(data-tab="packages")
+    .ui.tab.display(data-tab="packages")
       .ui.top.attached.tabular.menu
         a.item.active(ng-mouseover="pacTab()" data-tab='first') First
         a.item(ng-mouseover="pacTab()" data-tab='second') Second
@@ -99,8 +131,8 @@ a(href='/')
         | Second Package
       .ui.bottom.attached.tab.segment(data-tab='third')
         | Third Package
-    .ui.tab(data-tab="blog")
-      .ui.comments
+    .ui.tab.display(data-tab="blog")
+      .ui.comments.blog
         .comment
           .content
             .author First Day Abroad
@@ -138,10 +170,16 @@ a(href='/')
               .date 2 days ago
             .text
               | Hey guys, I hope this example comment is helping you read this documentation.
-    .ui.active.tab(data-tab="world")
+        form.ui.reply.form
+          .field
+            textarea
+          .ui.blue.labeled.submit.icon.button
+            i.icon.edit
+            |  Add A Blog
+    .ui.tab.display.active(data-tab="world")
       h3 This is my world
       #personalMap
-    .ui.tab(data-tab="conversations")
+    .ui.tab.display(data-tab="conversations")
       .ui.accordion
         .title
           i.dropdown.icon
@@ -193,31 +231,53 @@ a(href='/')
             | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
           p
             | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
-    .ui.tab(data-tab="settings")
+      h3 Send A message
+      form.ui.reply.form
+        .field
+          textarea
+        .ui.blue.labeled.submit.icon.button
+          i.icon.edit
+          |  Send
+    .ui.tab.display(data-tab="settings")
       h1 Edit
       .ui.styled.accordion
         .title
           i.dropdown.icon
           |     Bio
         .content
-          p.transition.hidden
-            | A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.
+          .transition.hidden
+            form.ui.reply.form
+              .field
+                textarea
+              .ui.blue.labeled.submit.icon.button
+                i.icon.edit
+                |  Edit Bio
         .title
           i.dropdown.icon
           |     Packages
         .content
-          p.transition.visible(style='display: block !important;')
-            | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
-          p.transition.visible(style='display: block !important;')
-            | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
-        .title
-          i.dropdown.icon
-          |     Blog
-        .content
-          p.transition.visible(style='display: block !important;')
-            | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
-          p.transition.visible(style='display: block !important;')
-            | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
+          .transition.visible
+            h3 Package One
+            form.ui.reply.form
+              .field
+                textarea
+              .ui.blue.labeled.submit.icon.button
+                i.icon.edit
+                |  Add Package
+            h3 Package Two
+            form.ui.reply.form
+              .field
+                textarea
+              .ui.blue.labeled.submit.icon.button
+                i.icon.edit
+                |  Add Package
+            h3 Package Three
+            form.ui.reply.form
+              .field
+                textarea
+              .ui.blue.labeled.submit.icon.button
+                i.icon.edit
+                |  Add Package
         .title
           i.dropdown.icon
           |     My World
