@@ -18,7 +18,6 @@ app.controller('home', ['$scope', function ($scope) {
   // }])
 
 app.controller('signup', ['$scope', function ($scope) {
-  $scope.message = 'apple';
   $scope.modal = function () {
     $('.ui.basic.modal')
     .modal('show');
@@ -26,17 +25,19 @@ app.controller('signup', ['$scope', function ($scope) {
 }])
 
 app.controller('search', ['$scope', function ($scope) {
-  $scope.message = 'apple';
 }])
 
 app.controller('user', ['$scope', function ($scope) {
-  $scope.message = 'apple';
   $scope.tab = function () {
     $('.tabular.menu .item').tab();
+    $('.ui.accordion').accordion();
   };
+  $scope.pacTab = function () {
+    $('.menu .item').tab();
+  }
   $scope.sidebar = function () {
     $('.tabular.menu .item').tab();
-    $('.ui.sidebar')
-    .sidebar('toggle')
+    $('.ui.accordion').accordion();
+    $('.ui.sidebar').sidebar('toggle');
   }
 }])

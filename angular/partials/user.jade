@@ -4,7 +4,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     .profile
       .profileImage
     h3 LLama
-    a.item.active(ng-click="sidebar()" data-tab="bio")
+    a.item(ng-click="sidebar()" data-tab="bio")
       | Bio
     a.item(ng-click="sidebar()" data-tab="badges")
       | Badges
@@ -12,19 +12,21 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
       | Packages
     a.item(ng-click="sidebar()" data-tab="blog")
       | Blog
-    a.item(ng-click="sidebar()" data-tab="world")
+    a.item.active(ng-click="sidebar()" data-tab="world")
       | My World
+    a.item(ng-click="sidebar()" data-tab="conversations")
+      | Conversations
     a.item(ng-click="sidebar()" data-tab="settings")
       | Settings
 a(href='/')
   img(class='profileLogo', src='./images/llama.png')
 .ui.grid
-  .four.wide.column
+  .four.wide.computer.column
     .ui.vertical.fluid.tabular.menu.fullScreen
       .profile
         .profileImage
       h3.profileName LLama
-      a.item.active(ng-mouseover="tab()" data-tab="bio")
+      a.item(ng-mouseover="tab()" data-tab="bio")
         | Bio
       a.item(ng-mouseover="tab()" data-tab="badges")
         | Badges
@@ -32,102 +34,196 @@ a(href='/')
         | Packages
       a.item(ng-mouseover="tab()" data-tab="blog")
         | Blog
-      a.item(ng-mouseover="tab()" data-tab="world")
+      a.item.active(ng-mouseover="tab()" data-tab="world")
         | My World
+      a.item(ng-mouseover="tab()" data-tab="conversations")
+        | Conversations
       a.item(ng-mouseover="tab()" data-tab="settings")
         | Settings
-  .twelve.wide.stretched.column
-    .ui.tab.active(data-tab="bio")
+  .twelve.wide.computer.sixteen.wide.tablet.stretched.column
+    .ui.tab(data-tab="bio")
       | This is me
     .ui.tab(data-tab="badges")
-      | These are my reviews
+      h3 These are my reviews
+      i.coffee.icon
+      i.food.icon
+      i.game.icon
+      i.heart.icon
+      i.angellist.icon
+      i.thumbs.down.icon
+      i.spy.icon
+      i.camera.retro.icon
+      i.trophy.icon
+      i.map.icon
+      i.money.icon
+      i.student.icon
+      .ui.items
+        .item
+          .badge
+            i.student.icon.ui.big
+          .content
+            a.header Stevie Feliciano
+            .description
+              p
+                | Stevie Feliciano is a 
+                a library scientist
+                |  living in New York City. She likes to spend her time reading, running, and writing.
+        .item
+          .badge
+            i.spy.icon.ui.big
+          .content
+            a.header Veronika Ossi
+            .description
+              p
+                | Veronika Ossi is a set designer living in New York who 
+                a enjoys
+                |  kittens, music, and partying.
+        .item
+          .badge
+            i.heart.icon.ui.big
+          .content
+            a.header Jenny Hess
+            .description
+              p
+                | Jenny is a student studying Media Management at 
+                a the New School
+                | .
     .ui.tab(data-tab="packages")
-      | This is what I offer
+      .ui.top.attached.tabular.menu
+        a.item.active(ng-mouseover="pacTab()" data-tab='first') First
+        a.item(ng-mouseover="pacTab()" data-tab='second') Second
+        a.item(ng-mouseover="pacTab()" data-tab='third') Third
+      .ui.bottom.attached.tab.segment.active(data-tab='first')
+        | First(free) Package
+      .ui.bottom.attached.tab.segment(data-tab='second')
+        | Second Package
+      .ui.bottom.attached.tab.segment(data-tab='third')
+        | Third Package
     .ui.tab(data-tab="blog")
-      .ui.feed
-        .event
-          .label
-            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+      .ui.comments
+        .comment
           .content
-            .summary
-              a.user
-                | Elliot Fu
-              |  added you as a friend
-              .date
-                | 1 Hour Ago
-            .meta
-              a.like
-                i.like.icon
-                |  4 Likes
-        .event
-          .label
-            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+            .author First Day Abroad
+            .metadata
+              .date 2 days ago
+            .text
+              | Hey guys, I hope this example comment is helping you read this documentation.
+        .comment
           .content
-            .summary
-              a Helen Troy
-              |  added 
-              a 2 new illustrations
-              .date
-                | 4 days ago
-            .extra.images
-              a
-                img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Before_Machu_Picchu.jpg/300px-Before_Machu_Picchu.jpg')
-              a
-                img(src='https://upload.wikimedia.org/wikipedia/commons/7/7e/Machu_Picchu_early_morning.JPG')
-            .meta
-              a.like
-                i.like.icon
-                |  1 Like
-        .event
-          .label
-            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+            .author First Day Abroad
+            .metadata
+              .date 2 days ago
+            .text
+              | Hey guys, I hope this example comment is helping you read this documentation.
+        .comment
           .content
-            .summary
-              a.user
-                | Jenny Hess
-              |  added you as a friend
-              .date
-                | 2 Days Ago
-            .meta
-              a.like
-                i.like.icon
-                |  8 Likes
-        .event
-          .label
-            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+            .author First Day Abroad
+            .metadata
+              .date 2 days ago
+            .text
+              | Hey guys, I hope this example comment is helping you read this documentation.
+        .comment
           .content
-            .summary
-              a Joe Henderson
-              |  posted on his page
-              .date
-                | 3 days ago
-            .extra.text
-              | Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even if we don't run extra laps that day, we surely will come back for more of the same another day soon.
-            .meta
-              a.like
-                i.like.icon
-                |  5 Likes
-        .event
-          .label
-            img(src='https://pbs.twimg.com/profile_images/2077732116/tumblr_m23hd2HBDc1rskdd1o1_500.jpg')
+            .author First Day Abroad
+            .metadata
+              .date 2 days ago
+            .text
+              | Hey guys, I hope this example comment is helping you read this documentation.
+              | Hey guys, I hope this example comment is helping you read this documentation.
+              | Hey guys, I hope this example comment is helping you read this documentation.
+        .comment
           .content
-            .summary
-              a Justen Kitsune
-              |  added 
-              a 2 new photos
-              |  of you
-              .date
-                | 4 days ago
-            .extra.images
-              a
-                img(src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Before_Machu_Picchu.jpg/300px-Before_Machu_Picchu.jpg')
-              a
-                img(src='https://upload.wikimedia.org/wikipedia/commons/7/7e/Machu_Picchu_early_morning.JPG')
-            .meta
-              a.like
-                i.like.icon
-                |  41 Likes
-    .ui.tab(data-tab="world")
-      | This is my world
+            .author First Day Abroad
+            .metadata
+              .date 2 days ago
+            .text
+              | Hey guys, I hope this example comment is helping you read this documentation.
+    .ui.active.tab(data-tab="world")
+      h3 This is my world
+      #personalMap
+    .ui.tab(data-tab="conversations")
+      .ui.accordion
+        .title
+          i.dropdown.icon
+          |     Matt Grown
+        .content
+          .ui.comments
+            .comment
+              .content
+                a.author Matt
+                .metadata
+                  span.date Today at 5:42PM
+                .text
+                  | How artistic!
+                .actions
+            .comment
+              .content
+                a.author Elliot Fu
+                .metadata
+                  span.date Yesterday at 12:30AM
+                .text
+                  p This has been very useful for my research. Thanks as well!
+                .actions
+            .comment
+              .content
+                a.author Joe Henderson
+                .metadata
+                  span.date 5 days ago
+                .text
+                  | Dude, this is awesome. Thanks so much
+                .actions
+                  a.reply Reply
+            form.ui.reply.form
+              .field
+                textarea
+              .ui.blue.labeled.submit.icon.button
+                i.icon.edit
+                |  Add Reply
+        .title
+          i.dropdown.icon
+          |     Iago Nino
+        .content
+          p
+            | There are many breeds of dogs. Each breed varies in size and temperament. Owners often select a breed of dog that they find to be compatible with their own lifestyle and desires from a companion.
+        .title
+          i.dropdown.icon
+          |     Eliza Gilmore
+        .content
+          p
+            | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
+          p
+            | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
     .ui.tab(data-tab="settings")
-      | These are my settings
+      h1 Edit
+      .ui.styled.accordion
+        .title
+          i.dropdown.icon
+          |     Bio
+        .content
+          p.transition.hidden
+            | A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.
+        .title
+          i.dropdown.icon
+          |     Packages
+        .content
+          p.transition.visible(style='display: block !important;')
+            | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
+          p.transition.visible(style='display: block !important;')
+            | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
+        .title
+          i.dropdown.icon
+          |     Blog
+        .content
+          p.transition.visible(style='display: block !important;')
+            | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
+          p.transition.visible(style='display: block !important;')
+            | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
+        .title
+          i.dropdown.icon
+          |     My World
+        .content
+          p.transition.visible(style='display: block !important;')
+            | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
+          p.transition.visible(style='display: block !important;')
+            | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
+script(src='/map/allmap.min.js')

@@ -23,6 +23,14 @@ gulp.task('map', function () {
     .pipe(gulp.dest('dist/map'));
 })
 
+gulp.task('particles', function () {
+  return gulp.src('angular/particles/*js')
+    .pipe(concat('allparticles.min.js'))
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/particles'));
+})
+
 gulp.task('index', function () {
   return gulp.src('angular/index.jade')
     .pipe(jade())
@@ -58,9 +66,10 @@ gulp.task('watchout', function () {
   gulp.watch('sass/*.scss', ['sass'])
   gulp.watch('angular/*js', ['js'])
   gulp.watch('angular/map/*js', ['map'])
+  gulp.watch('angular/particles/*js', ['particles'])
   gulp.watch('images/**', ['images'])
   gulp.watch('bower_components/**', ['bower'])
   gulp.watch('angular/partials/**', ['partials'])
 })
 
-gulp.task('default', ['index', 'sass', 'map', 'images', 'js', 'bower', 'partials', 'watchout'])
+gulp.task('default', ['index', 'sass', 'map', 'particles', 'images', 'js', 'bower', 'partials', 'watchout'])
