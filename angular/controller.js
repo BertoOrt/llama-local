@@ -17,19 +17,28 @@ app.controller('home', ['$scope', function ($scope) {
     }
   }])
 
-app.controller('signup', ['$scope', '$http', function ($scope, $http) {
+app.controller('signup', ['$scope', '$http', '$location', function ($scope, $http, $location) {
   $scope.modal = function () {
     $('.ui.basic.modal.signup')
     .modal('show');
   };
   $scope.dropdown = function () {
     $('.ui.dropdown').dropdown();
+    $('.ui.popup').popup();
   };
   $scope.signup = function () {
+    $scope.submitted = true;
     var country = $('.text').text();
+    if (country === "") {
+      country = "United States"
+    }
     var data = {email: $scope.email, country: country, password: $scope.password};
-    $http.post('//localhost:3000/signup', data).then(function (err, data) {
-      console.log(err, data);
+    $http.post('//localhost:3000/signup', data).then(function (response) {
+      $scope.submitted = false;
+      console.log(response.data.status);
+      if (response.data.status == "ok") {
+        $location.path('/newLLama')
+      }
     });
   };
 }]);

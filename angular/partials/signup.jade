@@ -18,17 +18,17 @@
             li Offer touring services or free advice
             li Add a blog
             li Create your own world map and more
-          | Help unite the world and make a more friendly place.
+          | Help unite the world and make it a more welcoming place.
         .center
           i.massive.globe.icon
       .formBox.sixteen.wide.tablet.eight.wide.computer.column
         .input
-          .ui.form
+          form.ui.form(name="signupForm" novalidate)
             .field
-              input.full(type='text', name='email', ng-model='email', placeholder='Email')
+              input.full(type='email', name='email', ng-model='email', placeholder='Email', required)
             .field(ng-mouseover="dropdown()")
-              .ui.fluid.search.selection.dropdown(ng-model="country")
-                input(type='hidden', name='country')
+              .ui.fluid.search.selection.dropdown
+                input(type='hidden' name="country")
                 i.dropdown.icon
                 .default.text Select Country
                 .menu
@@ -716,7 +716,7 @@
                   .item(data-value='ae')
                     i.ae.flag
                     | United Arab Emirates
-                  .item(data-value='us')
+                  .item.selected(data-value='us')
                     i.us.flag
                     | United States
                   .item(data-value='uy')
@@ -759,10 +759,19 @@
                     i.zw.flag
                     | Zimbabwe
             .field
-              input.full(type='password', name='password', ng-model='password', placeholder='Password')
+              input.full(type='password', maxlength="20", name='password', ng-model='password', ng-minlength="6", placeholder='Password' required)
             .field
-              input.full(type='password', name='confirm', ng-model='confirm', placeholder='Confirm Password')
-            button.ui.inverted.button(ng-click="signup()") Submit
+              input.full(type='password', maxlength="20", name='confirm', ng-model='confirm', placeholder='Confirm Password' required)
+            .ui.grid
+              .row
+                .six.wide.column
+                  button.ui.inverted.button(ng-class="{'loading': submitted == true}" ng-disabled="signupForm.$invalid || password !== confirm", ng-click="signup()") Submit
+                .ten.wide.column
+                  .error(ng-show="signupForm.email.$touched && signupForm.email.$invalid") Invalid Email
+                  .error(ng-show="signupForm.password.$touched && signupForm.password.$invalid") Password too short
+                  div(ng-show="signupForm.confirm.$touched")
+                    div(ng-show="password === confirm && signupForm.password.$valid ") Passwords Match!
+                    .error(ng-show="password !== confirm && signupForm.password.$valid ") Passwords Must Match
         hr
         .oauth
           .ui.facebook.button

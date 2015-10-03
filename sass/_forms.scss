@@ -1,3 +1,11 @@
 form.ui.form {
   width: 100%;
 }
+
+.field input.ng-invalid.ng-touched {
+  background-color: $error;
+}
+
+.error {
+  color: $error-text;
+}

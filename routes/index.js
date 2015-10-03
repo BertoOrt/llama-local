@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/signup', function(req, res, next) {
   console.log(req.body);
+  res.json({status: "ok"})
 });
 
 module.exports = router;
