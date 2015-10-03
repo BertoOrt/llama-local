@@ -18,6 +18,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl: 'partials/user.html',
         controller: 'user'
       })
-      .otherwise({redirectTo: '/'});
+      .otherwise({redirectTo: '/redirected'});
       $locationProvider.html5Mode(true);
 }]);

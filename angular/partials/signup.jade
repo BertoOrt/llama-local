@@ -23,11 +23,11 @@
           i.massive.globe.icon
       .formBox.sixteen.wide.tablet.eight.wide.computer.column
         .input
-          form.ui.form(action='/login' method='/post')
+          .ui.form
             .field
-              input.full(type='text', name='email', placeholder='Email')
+              input.full(type='text', name='email', ng-model='email', placeholder='Email')
             .field(ng-mouseover="dropdown()")
-              .ui.fluid.search.selection.dropdown
+              .ui.fluid.search.selection.dropdown(ng-model="country")
                 input(type='hidden', name='country')
                 i.dropdown.icon
                 .default.text Select Country
@@ -759,10 +759,10 @@
                     i.zw.flag
                     | Zimbabwe
             .field
-              input.full(type='password', name='password', placeholder='Password')
+              input.full(type='password', name='password', ng-model='password', placeholder='Password')
             .field
-              input.full(type='password', name='confirm', placeholder='Confirm Password')
-            button.ui.inverted.button(type='submit') Submit
+              input.full(type='password', name='confirm', ng-model='confirm', placeholder='Confirm Password')
+            button.ui.inverted.button(ng-click="signup()") Submit
         hr
         .oauth
           .ui.facebook.button

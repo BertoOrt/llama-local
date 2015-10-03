@@ -6,8 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Local Llama backend' });
 });
 
-// route for users
-
-// routes for countries
+router.post('/signup', function(req, res, next) {
+  console.log(req.body);
+});
 
 module.exports = router;

@@ -5,27 +5,34 @@ app.controller('home', ['$scope', function ($scope) {
     .modal('show');
   }
 }])
-  // .directive("myLogin", [function () {
-  //   function link(scope, element, attr) {
-  //     $('#login').click(function () {
-  //       $('.ui.basic.modal')
-  //       .modal('show');
-  //     })
-  //   }
-  //   return {
-  //     link: link
-  //   }
-  // }])
+  .directive("myLogin", [function () {
+    function link(scope, element, attr) {
+      $('#login').click(function () {
+        $('.ui.basic.modal')
+        .modal('show');
+      })
+    }
+    return {
+      link: link
+    }
+  }])
 
-app.controller('signup', ['$scope', function ($scope) {
+app.controller('signup', ['$scope', '$http', function ($scope, $http) {
   $scope.modal = function () {
     $('.ui.basic.modal.signup')
     .modal('show');
   };
   $scope.dropdown = function () {
     $('.ui.dropdown').dropdown();
-  }
-}])
+  };
+  $scope.signup = function () {
+    var country = $('.text').text();
+    var data = {email: $scope.email, country: country, password: $scope.password};
+    $http.post('//localhost:3000/signup', data).then(function (err, data) {
+      console.log(err, data);
+    });
+  };
+}]);
 
 app.controller('search', ['$scope', function ($scope) {
 }])
