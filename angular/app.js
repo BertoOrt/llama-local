@@ -15,13 +15,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         controller: 'search'
       })
       .when('/error', {
-        templateUrl: 'partials/user.html',
-        controller: 'user'
+        templateUrl: 'partials/error.html'
       })
       .when('/:user', {
         templateUrl: 'partials/user.html',
         controller: 'user'
       })
-      .otherwise({redirectTo: '/error'});
+      .otherwise({redirectTo: '/'});
       $locationProvider.html5Mode(true);
 }]);

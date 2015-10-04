@@ -25,7 +25,7 @@
         .input
           form.ui.form(name="signupForm" novalidate)
             .field
-              input.full(type='email', name='email', ng-model='email', placeholder='Email', required)
+              input.full(type='email',maxlength="20", name='email', ng-model='email', placeholder='Email', required)
             .field(my-dropdown)
               .ui.fluid.search.selection.dropdown
                 input(type='hidden' name="country")
@@ -768,6 +768,7 @@
                   button.ui.inverted.button(ng-class="{'loading': submitted == true}" ng-disabled="signupForm.$invalid || password !== confirm", ng-click="signup()") Submit
                 .ten.wide.column
                   .error(ng-show="signupForm.email.$touched && signupForm.email.$invalid") Invalid Email
+                  .error(ng-show="invalidEmail") Email already in system
                   .error(ng-show="signupForm.password.$touched && signupForm.password.$invalid") Password too short
                   div(ng-show="signupForm.confirm.$dirty")
                     div(ng-show="password === confirm && signupForm.password.$valid ") Passwords Match!
@@ -781,19 +782,26 @@
             i.instagram.icon
             |         Instagram
 .ui.basic.modal.signup
-  i.close.icon
   .header
     | Log in
   .image.content
     .image
       i.cloud.icon
     .description(style="width: 100%")
-      form.ui.form(action='/login' method='/post')
+      form.ui.form(name="loginForm")
         .field
-          input.full(type='text', name='email', placeholder='Email')
+          input.full(type='email',maxlength="20", ng-model="loginEmail", name='email', placeholder='Email' required)
         .field
-          input.full(type='password', name='password', placeholder='Password')
-        button.ui.green.inverted.basic.button(type='submit') Submit
+          input.full(type='password',maxlength="20", ng-model="loginPassword", name='password', ng-minlength="6" placeholder='Password' required)
+        .ui.grid
+          .row
+            .four.wide.column
+              button.ui.green.inverted.basic.button(ng-class="{'loading': loginSubmitted == true}", ng-disabled="loginForm.$invalid", ng-click="login()") Submit
+            .four.wide.column
+              .error(ng-show="loginForm.email.$touched && loginForm.email.$invalid") Invalid Email
+              .error(ng-show="invalidPassword") Invalid Password or Email
+            .four.wide.column
+              .error(ng-show="loginForm.password.$touched && loginForm.password.$invalid") Password too short
   .actions
     .two.fluid.ui.inverted.buttons
       .ui.facebook.button
