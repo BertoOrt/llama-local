@@ -26,7 +26,7 @@
           form.ui.form(name="signupForm" novalidate)
             .field
               input.full(type='email', name='email', ng-model='email', placeholder='Email', required)
-            .field(ng-mouseover="dropdown()")
+            .field(my-dropdown)
               .ui.fluid.search.selection.dropdown
                 input(type='hidden' name="country")
                 i.dropdown.icon
@@ -769,7 +769,7 @@
                 .ten.wide.column
                   .error(ng-show="signupForm.email.$touched && signupForm.email.$invalid") Invalid Email
                   .error(ng-show="signupForm.password.$touched && signupForm.password.$invalid") Password too short
-                  div(ng-show="signupForm.confirm.$touched")
+                  div(ng-show="signupForm.confirm.$dirty")
                     div(ng-show="password === confirm && signupForm.password.$valid ") Passwords Match!
                     .error(ng-show="password !== confirm && signupForm.password.$valid ") Passwords Must Match
         hr
