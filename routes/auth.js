@@ -8,8 +8,8 @@ var passport = require('passport');
 router.get('/auth/linkedin', passport.authenticate('linkedin'));
 
 router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-  failureRedirect: '//localhost:8080/',
-  successRedirect: '//localhost:8080/'
+  failureRedirect: '//localhost:8080/oauthCallback',
+  successRedirect: '//localhost:8080/oauthCallback'
 }));
 
 router.post('/signup', function(req, res, next) {
@@ -18,7 +18,8 @@ router.post('/signup', function(req, res, next) {
   var password = bcrypt.hashSync(req.body.password, 8);
   Users.findOne({email: email}).then(function (data) {
     if (!data) {
-      Users.insert({email: email, country: country, password: password}).then(function (data) {
+      Users.insert({email: email, country: country, password: password, headline: "Bienvenidos!",
+       about: "I'm a new llama. Click settings to edit info.", language: "English", name: "Llama"}).then(function (data) {
         res.json({status: "ok", id: data._id})
       });
     } else {

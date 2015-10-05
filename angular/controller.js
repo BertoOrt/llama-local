@@ -22,7 +22,7 @@ app.controller('home', ['$scope', '$http', '$location', function ($scope, $http,
   };
 }])
 
-app.controller('signup', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', function ($scope, $http, $location, ipCookie) {
   $scope.modal = function () {
     $('.ui.basic.modal.signup')
     .modal('show');
@@ -38,9 +38,9 @@ app.controller('signup', ['$scope', '$http', '$location', function ($scope, $htt
       .success(function (response, stat) {
         $scope.submitted = false;
         if (response.status == "ok") {
+          ipCookie('user', response.id, { encode: function (value) { return value; } });
           $location.path('/'+ response.id)
         } else {
-          console.log(response.status, stat);
           $scope.invalidEmail = true
         }
       })
@@ -79,10 +79,30 @@ app.controller('search', ['$scope', function ($scope) {
   $scope.apple = "apple";
 }])
 
-app.controller('user', ['$scope', function ($scope) {
+app.controller('user', ['$scope', '$http', 'ipCookie','$location', function ($scope, $http, ipCookie, $location) {
   $scope.addingReview = false;
   $scope.addingPost = false;
   $scope.isChecked = 1;
+  $scope.user = {}
+  console.log('here');
+  $http.post('//localhost:3000/user/info', {id: ipCookie('user')})
+    .success(function (response, stat) {
+      console.log('h');
+      if (response.status == "ok") {
+        $scope.user.name = response.body.name
+        $scope.user.country = response.body.country
+        $scope.user.email = response.body.email
+        $scope.user.about = response.body.about
+        $scope.user.headline = response.body.headline
+        $scope.user.language = response.body.language
+        console.log($scope.user);
+      } else {
+        console.log('error');
+      }
+    })
+    .error(function (data) {
+      $location.path('/error')
+    })
   $scope.tab = function () {
     $('.tabular.menu .item').tab();
     $('.ui.accordion').accordion();

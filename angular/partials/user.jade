@@ -3,7 +3,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
   .ui.vertical.fluid.tabular.menu
     .profile
       .profileImage
-    h3 LLama
+    h3 {{user.name}}
     a.item(ng-click="sidebar()" data-tab="bio")
       i.user.icon
       | Bio
@@ -25,12 +25,14 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     a.item(ng-click="sidebar()" data-tab="settings")
       i.settings.icon
       | Settings
+    a(href='/')
+      img(class='profileLogo', src='./images/llama.png')
 .ui.grid
   .four.wide.computer.column
     .ui.vertical.fluid.tabular.menu.fullScreen
       .profile
         .profileImage
-      h3.profileName LLama
+      h3.profileName {{user.name}}
       a.item.active(ng-mouseover="tab()" data-tab="bio")
         i.user.icon
         | Bio
@@ -58,7 +60,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     .ui.tab.display.active(data-tab="bio")
       .ui.sixteen.column.grid
         .row
-          h2 Save the Cheerleader, Save the World
+          h2 {{user.headline}}
         .row
           .sixteen.wide.column.profile
             table
@@ -66,29 +68,29 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
                 td
                   h4 Name: 
                 td 
-                  | Roberto
+                  | {{user.name}}
                 td
               tr
                 td
                   h4 Country:
                 td 
-                  | Venezuela
+                  | {{user.country}}
               tr
                 td
                   h4 Languages:
                 td 
-                  | Spanish, English, and Italian
+                  | {{user.language}}
               tr
                 td
                   h4 Contact:
                 td 
-                  | berto.ort@gmail.com | 303.956.5777
+                  | {{user.email}}
               tr
                 td
                   h4 About me:
         .row
           .sixteen.wide.column
-            .ui.segment Hi, I am awesome. Let me show you.
+            .ui.segment {{user.about}}
         .row
           .sixteen.wide.column
             h3 My World
