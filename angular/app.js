@@ -1,26 +1,31 @@
-let app = angular.module('app', ['ngAnimate', 'ngRoute']);
+let app = angular.module('app', ['ngAnimate', 'ui.router']);
 
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    $routeProvider
-      .when('/', {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+    $stateProvider
+      .state('home', {
+        url:'/',
         templateUrl: 'partials/home.html',
         controller: 'home'
       })
-      .when('/signup', {
+      .state('signup', {
+        url: '/signup',
         templateUrl: 'partials/signup.html',
         controller: 'signup'
       })
-      .when('/search', {
+      .state('search', {
+        url: '/search',
         templateUrl: 'partials/search.html',
         controller: 'search'
       })
-      .when('/error', {
+      .state('error', {
+        url: '/error',
         templateUrl: 'partials/error.html'
       })
-      .when('/:user', {
+      .state('user', {
+        url: '/:user',
         templateUrl: 'partials/user.html',
         controller: 'user'
       })
-      .otherwise({redirectTo: '/'});
+      $urlRouterProvider.otherwise('/');
       $locationProvider.html5Mode(true);
 }]);

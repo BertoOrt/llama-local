@@ -76,11 +76,13 @@ app.controller('signup', ['$scope', '$http', '$location', function ($scope, $htt
   }])
 
 app.controller('search', ['$scope', function ($scope) {
+  $scope.apple = "apple";
 }])
 
 app.controller('user', ['$scope', function ($scope) {
-  $scope.addingReview = false
-  $scope.addingPost = false
+  $scope.addingReview = false;
+  $scope.addingPost = false;
+  $scope.isChecked = 1;
   $scope.tab = function () {
     $('.tabular.menu .item').tab();
     $('.ui.accordion').accordion();

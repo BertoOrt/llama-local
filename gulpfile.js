@@ -51,7 +51,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('partials', function () {
-  gulp.src('angular/partials/**')
+  gulp.src(['angular/partials/*jade'])
     .pipe(jade())
     .pipe(gulp.dest('dist/partials'))
 })
