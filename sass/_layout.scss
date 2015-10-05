@@ -119,11 +119,12 @@
 }
 
 .profileLogo {
-  position: absolute;
-  bottom: 20px;
-  left: 23px;
+  // position: absolute;
+  // bottom: 20px;
+  // left: 23px;
   width: 40px;
   height: 35px;
+  margin: 1.5em;
 }
 
 .profileName {
@@ -134,8 +135,13 @@
   padding: 2em;
 }
 
-.ui.tab.display {
-  height: 87vh;
+.ui.tab.display{
+  height: 95vh;
+  overflow: scroll;
+}
+
+.tabular.menu.fullScreen {
+  height: 98vh;
   overflow: scroll;
 }
 

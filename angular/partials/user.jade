@@ -5,43 +5,57 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
       .profileImage
     h3 LLama
     a.item(ng-click="sidebar()" data-tab="bio")
+      i.user.icon
       | Bio
-    a.item(ng-click="sidebar()" data-tab="badges")
-      | Badges
     a.item(ng-click="sidebar()" data-tab="packages")
+      i.gift.icon
       | Packages
+    a.item(ng-click="sidebar()" data-tab="badges")
+      i.empty.star.icon
+      | Badges
     a.item(ng-click="sidebar()" data-tab="blog")
+      i.list.layout.icon
       | Blog
-    a.item.active(ng-click="sidebar()" data-tab="world")
-      | My World
     a.item(ng-click="sidebar()" data-tab="conversations")
+      i.comments.icon
       | Conversations
+    a.item.active(ng-click="sidebar()" data-tab="world")
+      i.users.icon
+      | Connections
     a.item(ng-click="sidebar()" data-tab="settings")
+      i.settings.icon
       | Settings
-a(href='/')
-  img(class='profileLogo', src='./images/llama.png')
 .ui.grid
   .four.wide.computer.column
     .ui.vertical.fluid.tabular.menu.fullScreen
       .profile
         .profileImage
       h3.profileName LLama
-      a.item(ng-mouseover="tab()" data-tab="bio")
+      a.item.active(ng-mouseover="tab()" data-tab="bio")
+        i.user.icon
         | Bio
-      a.item(ng-mouseover="tab()" data-tab="badges")
-        | Badges
       a.item(ng-mouseover="tab()" data-tab="packages")
+        i.gift.icon
         | Packages
+      a.item(ng-mouseover="tab()" data-tab="badges")
+        i.empty.star.icon
+        | Badges
       a.item(ng-mouseover="tab()" data-tab="blog")
+        i.list.layout.icon
         | Blog
-      a.item.active(ng-mouseover="tab()" data-tab="world")
-        | My World
       a.item(ng-mouseover="tab()" data-tab="conversations")
+        i.comments.icon
         | Conversations
+      a.item(ng-mouseover="tab()" data-tab="connections")
+        i.users.icon
+        | Connections
       a.item(ng-mouseover="tab()" data-tab="settings")
+        i.settings.icon
         | Settings
+      a(href='/')
+        img(class='profileLogo', src='./images/llama.png')
   .twelve.wide.computer.sixteen.wide.tablet.stretched.column
-    .ui.tab.display(data-tab="bio")
+    .ui.tab.display.active(data-tab="bio")
       .ui.sixteen.column.grid
         .row
           h2 Save the Cheerleader, Save the World
@@ -75,23 +89,15 @@ a(href='/')
         .row
           .sixteen.wide.column
             .ui.segment Hi, I am awesome. Let me show you.
+        .row
+          .sixteen.wide.column
+            h3 My World
+            #personalMap
     .ui.tab.display(data-tab="badges")
       h3 These are my reviews
-      i.coffee.icon
-      i.food.icon
-      i.game.icon
-      i.heart.icon
-      i.angellist.icon
-      i.thumbs.down.icon
-      i.spy.icon
-      i.camera.retro.icon
-      i.trophy.icon
-      i.map.icon
-      i.money.icon
-      i.student.icon
       .ui.items
         .item
-          .badge
+          .givenBadge
             i.student.icon.ui.big
           .content
             a.header Stevie Feliciano
@@ -101,7 +107,7 @@ a(href='/')
                 a library scientist
                 |  living in New York City. She likes to spend her time reading, running, and writing.
         .item
-          .badge
+          .givenBadge
             i.spy.icon.ui.big
           .content
             a.header Veronika Ossi
@@ -111,7 +117,7 @@ a(href='/')
                 a enjoys
                 |  kittens, music, and partying.
         .item
-          .badge
+          .givenBadge
             i.heart.icon.ui.big
           .content
             a.header Jenny Hess
@@ -120,6 +126,31 @@ a(href='/')
                 | Jenny is a student studying Media Management at 
                 a the New School
                 | .
+      form.ui.reply.form(ng-show="addingReview")
+        h3 New Review
+        .field
+          .ui.segment
+            i.big.badge.coffee.icon
+            i.big.badge.food.icon
+            i.big.badge.game.icon
+            i.big.badge.heart.icon
+            i.big.badge.angellist.icon
+            i.big.badge.thumbs.down.icon
+            i.big.badge.spy.icon
+            i.big.badge.camera.retro.icon
+            i.big.badge.trophy.icon
+            i.big.badge.map.icon
+            i.big.badge.money.icon
+            i.big.badge.student.icon
+        .field
+          textarea
+        .ui.labeled.icon.violet.button
+          i.icon.edit
+          |  Add Review
+        .ui.violet.button(ng-click='addReviewForm()')
+          | Cancel
+      .ui.violet.button(ng-click='addReviewForm()', ng-show='!addingReview')
+        | Add A Review
     .ui.tab.display(data-tab="packages")
       .ui.top.attached.tabular.menu
         a.item.active(ng-mouseover="pacTab()" data-tab='first') One
@@ -200,18 +231,21 @@ a(href='/')
               .date 2 days ago
             .text
               | Hey guys, I hope this example comment is helping you read this documentation.
-        form.ui.reply.form
+        form.ui.reply.form(ng-show="addingPost")
           h3 New Post
           .field
             input(type='text', name='title', placeholder='Title')
           .field
             textarea
-          button.ui.labeled.icon.violet.button
+          .ui.labeled.icon.violet.button
             i.icon.edit
-            |  Add A Blog
-    .ui.tab.display.active(data-tab="world")
-      h3 This is my world
-      #personalMap
+            |  Add Post
+          .ui.violet.button(ng-click='addPostForm()')
+            | Cancel
+        .ui.violet.button(ng-click='addPostForm()', ng-show='!addingPost')
+          | Add A Post
+    .ui.tab.display(data-tab="connections")
+      h3 These are my connections
     .ui.tab.display(data-tab="conversations")
       .ui.accordion
         .title

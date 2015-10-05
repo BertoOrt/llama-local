@@ -3,6 +3,14 @@ var router = express.Router();
 var bcrypt = require('bcryptjs');
 var db = require('./../connection');
 var Users = db.get('users');
+var passport = require('passport');
+
+router.get('/auth/linkedin', passport.authenticate('linkedin'));
+
+router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+  failureRedirect: '//localhost:8080/',
+  successRedirect: '//localhost:8080/'
+}));
 
 router.post('/signup', function(req, res, next) {
   var email = req.body.email;

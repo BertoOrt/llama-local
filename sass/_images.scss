@@ -29,6 +29,15 @@
   border: 3px solid $cuar;
 }
 
-.badge {
+.givenBadge {
   margin-right: 1em;
+}
+
+.selectedBadge {
+  color: $pri;
+}
+
+.badge:hover {
+  cursor: pointer;
+  color: $pri;
 }

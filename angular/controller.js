@@ -79,6 +79,8 @@ app.controller('search', ['$scope', function ($scope) {
 }])
 
 app.controller('user', ['$scope', function ($scope) {
+  $scope.addingReview = false
+  $scope.addingPost = false
   $scope.tab = function () {
     $('.tabular.menu .item').tab();
     $('.ui.accordion').accordion();
@@ -91,5 +93,11 @@ app.controller('user', ['$scope', function ($scope) {
     $('.tabular.menu .item').tab();
     $('.ui.accordion').accordion();
     $('.ui.sidebar').sidebar('toggle');
+  }
+  $scope.addReviewForm = function () {
+    $scope.addingReview = !$scope.addingReview;
+  }
+  $scope.addPostForm = function () {
+    $scope.addingPost = !$scope.addingPost;
   }
 }])
