@@ -22,6 +22,7 @@
     "font-awesome": "~4.4.0",
     "particles.js": "~2.0.0",
     "angular-ui-router": "~0.2.15",
-    "angular-cookie": "~4.0.9"
+    "angular-cookie": "~4.0.9",
+    "jquery.cookie": "jquery-cookie#~1.4.1"
   }
 }

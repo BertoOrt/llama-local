@@ -84,10 +84,8 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', function ($sc
   $scope.addingPost = false;
   $scope.isChecked = 1;
   $scope.user = {}
-  console.log('here');
   $http.post('//localhost:3000/user/info', {id: ipCookie('user')})
     .success(function (response, stat) {
-      console.log('h');
       if (response.status == "ok") {
         $scope.user.name = response.body.name
         $scope.user.country = response.body.country
@@ -95,7 +93,6 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', function ($sc
         $scope.user.about = response.body.about
         $scope.user.headline = response.body.headline
         $scope.user.language = response.body.language
-        console.log($scope.user);
       } else {
         console.log('error');
       }
