@@ -93,7 +93,20 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
             .ui.segment {{user.about}}
         .row
           .sixteen.wide.column
-            h3 My World
+            h3.mapTitle My World
+            .keys
+              .key
+                .keyColor.lived
+                .keyTitle
+                  | Have Lived
+              .key
+                .keyColor.visited
+                .keyTitle
+                  | Have visited
+              .key
+                .keyColor.want
+                .keyTitle
+                  | Want to go
             #personalMap
     .ui.tab.display(data-tab="badges")
       h3 These are my reviews

@@ -3,6 +3,7 @@ var router = express.Router();
 var bcrypt = require('bcryptjs');
 var db = require('./../connection');
 var Users = db.get('users');
+var World = db.get('world');
 var passport = require('passport');
 
 router.get('/auth/linkedin', passport.authenticate('linkedin'));
@@ -20,7 +21,10 @@ router.post('/signup', function(req, res, next) {
     if (!data) {
       Users.insert({email: email, country: country, password: password, headline: "Bienvenidos!",
        about: "I'm a new llama. Click settings to edit info.", language: "English", name: "Llama"}).then(function (data) {
-        res.json({status: "ok", id: data._id})
+        var id = data._id.toString()
+        World.insert({userId: id}).then(function () {
+          res.json({status: "ok", id: id})
+        })
       });
     } else {
       res.json({status: "error"})

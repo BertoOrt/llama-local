@@ -152,3 +152,38 @@
 .profile {
   height: auto;
 }
+
+// ################### map
+
+h3.mapTitle {
+  display: inline-block;
+}
+
+.keys {
+  margin: 2em;
+  display: block;
+}
+
+.key {
+  display: inline-block;
+  .keyTitle {
+    display: inline-block;
+    font-weight: bold;
+  }
+  .keyColor {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 40px;
+    height: 20px;
+    display: inline-block;
+  }
+  .want {
+    background-color: #8e1f7c;
+  }
+  .visited {
+    background-color: #4d65a2;
+  }
+  .lived {
+    background-color: #23CE6B;
+  }
+}

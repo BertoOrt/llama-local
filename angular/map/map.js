@@ -318,13 +318,23 @@ if (mapElement) {
 var personalMapElement = document.getElementById('personalMap');
 if (personalMapElement) {
   var id = $.cookie('user');
-  var data
-  $.post('//localhost:3000/user/info', {id: id}).then(function (data) {
+  $.post('//localhost:3000/user/world', {id: id}).then(function (data) {
+    console.log(data);
     var defaultData = countries;
     var fillIndex = {
       "1": "authorHasTraveledTo",
       "2": "authorHasLivedIn",
-      "3": "highlightFillColor",
+      "3": "authorWantsToGo",
+      "4": "authorHasNotTraveled",
+    }
+    for (var key in data.body) {
+      if (data.body.hasOwnProperty(key) && key !== "userId") {
+        if (key !== "_id") {
+          console.log('this: ', key, defaultData);
+          defaultData[key].fillKey = fillIndex[data.body[key]]
+          defaultData[key].value = data.body[key]
+        }
+      }
     }
     var personalMap = new Datamap({
       element: personalMapElement,
@@ -332,18 +342,21 @@ if (personalMapElement) {
       responsive: true,
       fills: {
         defaultFill: "#A39BA8",
-        authorHasTraveledTo: "#64e399",
+        authorHasNotTraveled: "#A39BA8",
+        authorHasTraveledTo: "#4d65a2",
         authorHasLivedIn: "#23CE6B",
-        highlightFillColor: "#1f8e4e"
+        authorWantsToGo: "#8e1f7c"
       },
       done: datamap => {
         datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-            defaultData[geography.id].value = defaultData[geography.id].value + 1 || 1;
-            if (defaultData[geography.id].value > 3) {
-              defaultData[geography.id].value = 1;
-            }
+          defaultData[geography.id].value = Number(defaultData[geography.id].value) + 1 || 1;
+          if (defaultData[geography.id].value > 4) {
+            defaultData[geography.id].value = 1;
+          }
+          $.post('//localhost:3000/user/update/world', {id: id, country: geography.id, value: defaultData[geography.id].value}).then(function (data) {
             defaultData[geography.id].fillKey = fillIndex[String((defaultData[geography.id].value))];
             personalMap.updateChoropleth(defaultData);
+          })
         });
       },
       data: defaultData,
