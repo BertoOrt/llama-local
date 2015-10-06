@@ -6,12 +6,31 @@ var Users = db.get('users');
 var World = db.get('world');
 var passport = require('passport');
 
-router.get('/auth/linkedin', passport.authenticate('linkedin'));
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'public_profile', 'email']}));
 
-router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-  failureRedirect: '//localhost:8080/oauthCallback',
-  successRedirect: '//localhost:8080/oauthCallback'
-}));
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: '//localhost:8080/error'}), function (req, res) {
+  res.locals.user = req.user
+  Users.findOne({facebookId: req.user.id}).then(function (userData) {
+    if (!userData) {
+      Users.insert({facebookId: req.user.id, headline: "Bienvenidos!", facebookToken: req.user.token,
+       about: "I'm a new llama. Click settings to edit info.", language: "English", name: req.user.displayName}).then(function (data) {
+        var id = data._id.toString()
+        World.insert({userId: id}).then(function () {
+          console.log(id);
+          res.redirect('//localhost:8080/' + id)
+        })
+      });
+    } else {
+      console.log(userData._id.toString());
+      res.redirect('//localhost:8080/' + userData._id.toString())
+    }
+  })
+});
+
+// router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+//   failureRedirect: '//localhost:8080/oauthCallback',
+//   successRedirect: '//localhost:8080/oauthCallback'
+// }));
 
 router.post('/signup', function(req, res, next) {
   var email = req.body.email;
