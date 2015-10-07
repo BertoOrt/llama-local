@@ -5,7 +5,6 @@ var Users = db.get('users');
 var World = db.get('world');
 
 router.post('/info', function(req, res, next) {
-  console.log(req.user, req.session, req.locals);
   var id = req.body.id
   Users.findOne({_id: id}).then(function (data) {
     if (!data) {
@@ -13,6 +12,14 @@ router.post('/info', function(req, res, next) {
     } else {
       res.json({status: "ok", body: data})
     }
+  })
+});
+
+router.post('/editInfo', function(req, res, next) {
+  var id = req.body.id
+  delete req.body.id;
+  Users.update({_id: id}, {$set: req.body }).then(function (data) {
+    res.json({status: "ok", body: "data"})
   })
 });
 

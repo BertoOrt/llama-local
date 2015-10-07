@@ -270,6 +270,9 @@ var color = function (num) {
 
 var mapElement = document.getElementById('map');
 if (mapElement) {
+  $(window).on('resize', function() {
+   map.resize();
+  });
   var map = new Datamap({
     element: mapElement,
     projection: 'mercator',
@@ -319,7 +322,6 @@ var personalMapElement = document.getElementById('personalMap');
 if (personalMapElement) {
   var id = $.cookie('user');
   $.post('//localhost:3000/user/world', {id: id}).then(function (data) {
-    console.log(data);
     var defaultData = countries;
     var fillIndex = {
       "1": "authorHasTraveledTo",
@@ -330,7 +332,6 @@ if (personalMapElement) {
     for (var key in data.body) {
       if (data.body.hasOwnProperty(key) && key !== "userId") {
         if (key !== "_id") {
-          console.log('this: ', key, defaultData);
           defaultData[key].fillKey = fillIndex[data.body[key]]
           defaultData[key].value = data.body[key]
         }
@@ -345,7 +346,7 @@ if (personalMapElement) {
         authorHasNotTraveled: "#A39BA8",
         authorHasTraveledTo: "#4d65a2",
         authorHasLivedIn: "#23CE6B",
-        authorWantsToGo: "#8e1f7c"
+        authorWantsToGo: "#add49b"
       },
       done: datamap => {
         datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
@@ -356,6 +357,7 @@ if (personalMapElement) {
           $.post('//localhost:3000/user/update/world', {id: id, country: geography.id, value: defaultData[geography.id].value}).then(function (data) {
             defaultData[geography.id].fillKey = fillIndex[String((defaultData[geography.id].value))];
             personalMap.updateChoropleth(defaultData);
+            personalMap.resize()
           })
         });
       },
@@ -371,13 +373,8 @@ if (personalMapElement) {
         }
       }
     });
+    $(window).on('resize', function() {
+      personalMap.resize();
+    });
   })
 }
-
-$(window).on('resize', function() {
-  if (map) {
-   map.resize();
-  } else if (personalMap) {
-    personalMap.resize();
-  }
-});

@@ -9,19 +9,19 @@ var passport = require('passport');
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'public_profile', 'email']}));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: '//localhost:8080/error'}), function (req, res) {
-  res.locals.user = req.user
+  console.log('success', req.user);
   Users.findOne({facebookId: req.user.id}).then(function (userData) {
     if (!userData) {
-      Users.insert({facebookId: req.user.id, headline: "Bienvenidos!", facebookToken: req.user.token,
+      Users.insert({facebookId: req.user.id, headline: "Bienvenido!", facebookToken: req.user.token,
        about: "I'm a new llama. Click settings to edit info.", language: "English", name: req.user.displayName}).then(function (data) {
         var id = data._id.toString()
+        res.cookie('user', id);
         World.insert({userId: id}).then(function () {
           console.log(id);
           res.redirect('//localhost:8080/' + id)
         })
       });
     } else {
-      console.log(userData._id.toString());
       res.redirect('//localhost:8080/' + userData._id.toString())
     }
   })

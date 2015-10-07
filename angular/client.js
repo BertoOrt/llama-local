@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  if (window.location.hash && window.location.hash == '#_=_') {
+    window.location.hash = '';
+  }
   $(window).scroll(function () {
     if ($(window).scrollTop() > 80) {
       $('.nav').addClass('navbar-fixed');

@@ -83,8 +83,8 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', function ($sc
   $scope.addingReview = false;
   $scope.addingPost = false;
   $scope.isChecked = 1;
-  $scope.user = {}
-  $http.post('//localhost:3000/user/info', {id: ipCookie('user')})
+  $scope.user = {id: ipCookie('user')}
+  $http.post('//localhost:3000/user/info', {id: $scope.user.id})
     .success(function (response, stat) {
       if (response.status == "ok") {
         $scope.user.name = response.body.name
@@ -118,5 +118,39 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', function ($sc
   }
   $scope.addPostForm = function () {
     $scope.addingPost = !$scope.addingPost;
+  }
+  $scope.submitBioForm = function () {
+    var country = $('.countryDropdown').text();
+    console.log(country);
+    if (country !== "Select Country") {
+      $scope.user.country = country
+    };
+    $scope.sendingInfo = true;
+    $http.post('//localhost:3000/user/editInfo', $scope.user)
+      .success(function (response, stat) {
+        $scope.sendingInfo = false;
+        if (response.status == "ok") {
+          $('.bioTab').click()
+          $('.message').fadeIn()
+          setTimeout(function () {
+            $('.message').fadeOut()
+          }, 3000);
+          console.log('flash message');
+        } else {
+          console.log('error');
+        }
+      })
+      .error(function (data) {
+        $location.path('/error')
+      })
+    console.log('info: ', $scope.user);
+  }
+}])
+  .directive("myDropdown", [function () {
+  function link(scope, element, attr) {
+    return $('.ui.dropdown').dropdown();
+  }
+  return {
+    link: link
   }
 }])

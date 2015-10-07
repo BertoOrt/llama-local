@@ -4,7 +4,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     .profile
       .profileImage
     h3 {{user.name}}
-    a.item(ng-click="sidebar()" data-tab="bio")
+    a.item.active(ng-click="sidebar()" data-tab="bio")
       i.user.icon
       | Bio
     a.item(ng-click="sidebar()" data-tab="packages")
@@ -19,7 +19,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     a.item(ng-click="sidebar()" data-tab="conversations")
       i.comments.icon
       | Conversations
-    a.item.active(ng-click="sidebar()" data-tab="world")
+    a.item(ng-click="sidebar()" data-tab="world")
       i.users.icon
       | Connections
     a.item(ng-click="sidebar()" data-tab="settings")
@@ -64,23 +64,23 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
         .row
           .sixteen.wide.column.profile
             table
-              tr
+              tr(ng-show="user.name")
                 td
                   h4 Name: 
                 td 
                   | {{user.name}}
                 td
-              tr
+              tr(ng-show="user.country")
                 td
                   h4 Country:
                 td 
                   | {{user.country}}
-              tr
+              tr(ng-show="user.language")
                 td
-                  h4 Languages:
+                  h4 Language:
                 td 
                   | {{user.language}}
-              tr
+              tr(ng-show="user.email")
                 td
                   h4 Contact:
                 td 
@@ -96,17 +96,17 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
             h3.mapTitle My World
             .keys
               .key
-                .keyColor.lived
-                .keyTitle
-                  | Have Lived
-              .key
                 .keyColor.visited
                 .keyTitle
-                  | Have visited
+                  | Visited
+              .key
+                .keyColor.lived
+                .keyTitle
+                  | Lived
               .key
                 .keyColor.want
                 .keyTitle
-                  | Want to go
+                  | Someday
             #personalMap
     .ui.tab.display(data-tab="badges")
       h3 These are my reviews
@@ -342,20 +342,26 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
           i.icon.edit
           |  Send
     .ui.tab.display(data-tab="settings")
+      .ui.success.message#bioSuccessMessage
+        i.close.icon
+        .header
+          | Success!
+        p Your Bio has been saved
       h1 Edit
       .ui.styled.accordion
-        .title
+        .title.bioTab
           i.dropdown.icon
           |     Bio
         .content
           .transition.hidden
-            form.ui.reply.form
+            form(name="editBioForm").ui.reply.form
               .field
-                label Country
-                .ui.fluid.search.selection.dropdown
+                input(type="text" name='name' ng-model="user.name" placeholder="Name" required)
+              .field
+                .ui.fluid.search.selection.dropdown(my-dropdown)
                   input(type='hidden', name='country')
                   i.dropdown.icon
-                  .default.text Select Country
+                  .default.text.countryDropdown Select Country
                   .menu
                     .item(data-value='af')
                       i.af.flag
@@ -1084,8 +1090,12 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
                       i.zw.flag
                       | Zimbabwe
               .field
-                textarea
-              .ui.blue.labeled.submit.icon.button
+                input(type="text" name='language' placeholder="Language" ng-model="user.language")
+              .field
+                input(type="text" name="contact" placeholder="Contact Info" ng-model="user.email")
+              .field
+                textarea(name="about" ng-model="user.about")
+              .ui.blue.labeled.submit.icon.button(ng-class="{loading: sendingInfo}" ng-click="submitBioForm()" ng-disabled="editBioForm.$invalid")
                 i.icon.edit
                 |  Edit Bio
         .title
@@ -1122,4 +1132,5 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
             | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
           p.transition.visible(style='display: block !important;')
             | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
+
 script(src='/map/allmap.min.js')
