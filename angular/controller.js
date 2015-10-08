@@ -84,22 +84,22 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', function ($sc
   $scope.addingPost = false;
   $scope.isChecked = 1;
   $scope.user = {id: ipCookie('user')}
-  $http.post('//localhost:3000/user/info', {id: $scope.user.id})
-    .success(function (response, stat) {
-      if (response.status == "ok") {
-        $scope.user.name = response.body.name
-        $scope.user.country = response.body.country
-        $scope.user.email = response.body.email
-        $scope.user.about = response.body.about
-        $scope.user.headline = response.body.headline
-        $scope.user.language = response.body.language
-      } else {
-        console.log('error');
-      }
-    })
-    .error(function (data) {
-      $location.path('/error')
-    })
+  $http.get('//localhost:3000/info')
+    // .success(function (response, stat) {
+    //   if (response.status == "ok") {
+    //     $scope.user.name = response.body.name
+    //     $scope.user.country = response.body.country
+    //     $scope.user.email = response.body.email
+    //     $scope.user.about = response.body.about
+    //     $scope.user.headline = response.body.headline
+    //     $scope.user.language = response.body.language
+    //   } else {
+    //     console.log('error');
+    //   }
+    // })
+    // .error(function (data) {
+    //   $location.path('/error')
+    // })
   $scope.tab = function () {
     $('.tabular.menu .item').tab();
     $('.ui.accordion').accordion();

@@ -9,28 +9,28 @@ var passport = require('passport');
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'public_profile', 'email']}));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: '//localhost:8080/error'}), function (req, res) {
-  console.log('success', req.user);
+  req.session.cookie.user = req.user
+  // console.log('user', req.user);
+  // console.log('sess', req.session);
+  // req.session.cookie.httpOnly = true;
+  console.log('sess', req.session);
   Users.findOne({facebookId: req.user.id}).then(function (userData) {
     if (!userData) {
+      console.log('not here');
       Users.insert({facebookId: req.user.id, headline: "Bienvenido!", facebookToken: req.user.token,
        about: "I'm a new llama. Click settings to edit info.", language: "English", name: req.user.displayName}).then(function (data) {
         var id = data._id.toString()
         res.cookie('user', id);
         World.insert({userId: id}).then(function () {
-          console.log(id);
           res.redirect('//localhost:8080/' + id)
         })
       });
     } else {
+      console.log("data: ", userData._id);
       res.redirect('//localhost:8080/' + userData._id.toString())
     }
   })
 });
-
-// router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-//   failureRedirect: '//localhost:8080/oauthCallback',
-//   successRedirect: '//localhost:8080/oauthCallback'
-// }));
 
 router.post('/signup', function(req, res, next) {
   var email = req.body.email;
@@ -62,5 +62,22 @@ router.post('/login', function(req, res, next) {
     }
   });
 });
+
+router.get('/info', function(req, res, next) {
+  // var id = req.body.id
+  console.log("undefined? whyyyyyy?", req.session);
+  // Users.findOne({_id: id}).then(function (data) {
+  //   if (!data) {
+  //     res.json({status: "error", body: "sorry, nothing found"})
+  //   } else {
+  //     res.json({status: "ok", body: data})
+  //   }
+  // })
+});
+
+router.get('/logout', function (req, res, next) {
+  req.session = null
+  res.redirect('//localhost:8080/')
+})
 
 module.exports = router;

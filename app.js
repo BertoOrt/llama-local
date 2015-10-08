@@ -4,38 +4,45 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('cookie-session');
+var session = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy
 
 require('dotenv').load();
+
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+}
 
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var users = require('./routes/user');
 
 var app = express();
-app.set('trust proxy', 1)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('trust proxy', 1)
 
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
+var sess = {
+  secret: [process.env.SESSION_KEY1, process.env.SESSION_KEY2],
+  resave: false,
+  cookie: {httpOnly: false},
+  saveUninitialized: true
 }
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(session({ keys: [process.env.SESSION_KEY1, process.env.SESSION_KEY2] }))
+app.use(allowCrossDomain);
+app.use(session(sess))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(allowCrossDomain);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
@@ -53,7 +60,6 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: process.env.HOST + "/auth/facebook/callback",
-    state: true
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -63,7 +69,6 @@ passport.use(new FacebookStrategy({
 ));
 
 app.use(function (req, res, next) {
-  console.log('app.js', req.user, 'or', res.locals);
   res.locals.user = req.user
   next()
 })

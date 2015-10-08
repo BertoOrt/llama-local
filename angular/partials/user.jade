@@ -25,6 +25,9 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     a.item(ng-click="sidebar()" data-tab="settings")
       i.settings.icon
       | Settings
+    a.item(href="//localhost:3000/logout")
+      i.reply.icon
+      | Logout
     a(href='/')
       img(class='profileLogo', src='./images/llama.png')
 .ui.grid
@@ -54,6 +57,9 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
       a.item(ng-mouseover="tab()" data-tab="settings")
         i.settings.icon
         | Settings
+      a.item(href="//localhost:3000/logout") 
+        i.reply.icon
+        | Logout
       a(href='/')
         img(class='profileLogo', src='./images/llama.png')
   .twelve.wide.computer.sixteen.wide.tablet.stretched.column
@@ -87,7 +93,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
                   | {{user.email}}
               tr
                 td
-                  h4 About me:
+                  h4 About me
         .row
           .sixteen.wide.column
             .ui.segment {{user.about}}
@@ -1097,7 +1103,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
                 textarea(name="about" ng-model="user.about")
               .ui.blue.labeled.submit.icon.button(ng-class="{loading: sendingInfo}" ng-click="submitBioForm()" ng-disabled="editBioForm.$invalid")
                 i.icon.edit
-                |  Edit Bio
+                |  Save
         .title
           i.dropdown.icon
           |     Packages
