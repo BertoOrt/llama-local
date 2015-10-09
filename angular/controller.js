@@ -1,9 +1,8 @@
-app.controller('home', ['$scope', '$http', '$location', 'AuthUser', function ($scope, $http, $location, AuthUser) {
+app.controller('home', ['$scope', '$http', '$location', function ($scope, $http, $location) {
   $scope.modal = function () {
     $('.ui.basic.modal.home')
     .modal('show');
   }
-  console.log(AuthUser);
   $scope.login = function () {
     $scope.loginSubmitted = true;
     var data = {email: $scope.loginEmail, password: $scope.loginPassword};
@@ -35,13 +34,21 @@ app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser'
       country = "United States"
     };
     var data = {email: $scope.email, country: country, password: $scope.password};
-    AuthUser.signup(data);
+    var result = AuthUser.signup(data);
+    if (result) {
+      $scope.invalidEmail = true
+    } else {
+      $scope.submitted = false;
+    }
     console.log(AuthUser.check());
   };
   $scope.login = function () {
     $scope.loginSubmitted = true;
     var data = {email: $scope.loginEmail, password: $scope.loginPassword};
-    AuthUser.login(data);
+    var result = AuthUser.login(data);
+    if (result) {
+      $scope.invalidPassword = true;
+    }
     console.log(AuthUser.check());
   };
 }])

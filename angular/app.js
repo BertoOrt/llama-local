@@ -1,4 +1,4 @@
-let app = angular.module('app', ['ngAnimate', 'ui.router', 'ipCookie']);
+var app = angular.module('app', ['ngAnimate', 'ui.router', 'ipCookie']);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
