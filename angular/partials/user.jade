@@ -57,7 +57,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
       a.item(ng-mouseover="tab()" data-tab="settings")
         i.settings.icon
         | Settings
-      a.item(href="//localhost:3000/logout") 
+      a.item(ng-click="logout()" href="//localhost:3000/logout") 
         i.reply.icon
         | Logout
       a(href='/')
@@ -96,7 +96,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
                   h4 About me
         .row
           .sixteen.wide.column
-            .ui.segment {{user.about}}
+            .ui.segment.aboutMe {{user.about}}
         .row
           .sixteen.wide.column
             h3.mapTitle My World

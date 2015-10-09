@@ -251,23 +251,6 @@ ZWE: {fillKey: "defaultFill", name: "Zimbabwe",},
 // "-99": {name: "Somaliland"}
 }
 
-var color = function (num) {
-  switch (num) {
-    case "1":
-      return "red";
-      break;
-    case "2":
-      return "blue";
-      break;
-    case "3":
-      return "orange";
-      break;
-    case "4":
-      return "purple";
-      break;
-  }
-}
-
 var mapElement = document.getElementById('map');
 if (mapElement) {
   $(window).on('resize', function() {

@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
+var session = require('cookie-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy
 
@@ -27,18 +27,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('trust proxy', 1)
-
-var sess = {
-  secret: [process.env.SESSION_KEY1, process.env.SESSION_KEY2],
-  resave: false,
-  cookie: {httpOnly: false},
-  saveUninitialized: true
-}
+//
+// var sess = {
+//   name: "macademian-white-chocolate-chip",
+//   secret: [process.env.SESSION_KEY1, process.env.SESSION_KEY2],
+//   resave: false,
+//   cookie: {httpOnly: false, secure: false},
+//   saveUninitialized: true
+// }
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(allowCrossDomain);
-app.use(session(sess))
+app.use(session({keys: [process.env.SESSION_KEY1, process.env.SESSION_KEY2]}))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

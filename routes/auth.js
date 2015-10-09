@@ -9,11 +9,8 @@ var passport = require('passport');
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'public_profile', 'email']}));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: '//localhost:8080/error'}), function (req, res) {
-  req.session.cookie.user = req.user
-  // console.log('user', req.user);
-  // console.log('sess', req.session);
-  // req.session.cookie.httpOnly = true;
-  console.log('sess', req.session);
+  console.log(req.session);
+  res.cookie('user', req.user.id);
   Users.findOne({facebookId: req.user.id}).then(function (userData) {
     if (!userData) {
       console.log('not here');
@@ -61,18 +58,6 @@ router.post('/login', function(req, res, next) {
       res.json({status: "error"})
     }
   });
-});
-
-router.get('/info', function(req, res, next) {
-  // var id = req.body.id
-  console.log("undefined? whyyyyyy?", req.session);
-  // Users.findOne({_id: id}).then(function (data) {
-  //   if (!data) {
-  //     res.json({status: "error", body: "sorry, nothing found"})
-  //   } else {
-  //     res.json({status: "ok", body: data})
-  //   }
-  // })
 });
 
 router.get('/logout', function (req, res, next) {

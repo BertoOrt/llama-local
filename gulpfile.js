@@ -8,10 +8,10 @@ var jade = require('gulp-jade');
 var babel = require('gulp-babel');
 
 gulp.task('js', function () {
-  return gulp.src('angular/*js')
+  return gulp.src(['angular/app.js','angular/factory.js','angular/controller.js','angular/client.js'])
     .pipe(concat('all.min.js'))
     .pipe(babel())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('dist'));
 })
 

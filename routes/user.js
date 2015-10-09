@@ -4,6 +4,18 @@ var db = require('./../connection');
 var Users = db.get('users');
 var World = db.get('world');
 
+
+router.post('/info', function(req, res, next) {
+  var id = req.body.id
+  Users.findOne({_id: id}).then(function (data) {
+    if (!data) {
+      res.json({status: "error", body: "sorry, nothing found"})
+    } else {
+      res.json({status: "ok", body: data})
+    }
+  })
+});
+
 router.post('/editInfo', function(req, res, next) {
   var id = req.body.id
   delete req.body.id;
