@@ -4,7 +4,6 @@ var db = require('./../connection');
 var Users = db.get('users');
 var World = db.get('world');
 
-
 router.post('/info', function(req, res, next) {
   var id = req.body.id
   var url = req.body.url
@@ -34,8 +33,15 @@ router.post('/editInfo', function(req, res, next) {
 });
 
 router.post('/auth', function (req, res, next) {
-  console.log(req.body.id, req.body.cookie);
-  res.json({status: "ok"})
+  var url = req.body.url
+  Users.findOne({_id: req.body.cookie}).then(function (data) {
+    console.log('check', String(data._id),typeof data._id, url, typeof url, String(data._id) === url);
+    if (data.reference === url || String(data._id) === url) {
+      res.json({status: "ok"})
+    } else {
+      res.json({status: "error"})
+    }
+  })
 })
 
 router.post('/world', function(req, res, next) {
@@ -55,7 +61,7 @@ router.post('/world', function(req, res, next) {
         })
       })
     } else {
-      World.findOne({userId: data._id}).then(function (map) {
+      World.findOne({userId: String(data._id)}).then(function (map) {
         if (!map) {
           res.json({status: "error", body: "sorry, nothing found"})
         } else {

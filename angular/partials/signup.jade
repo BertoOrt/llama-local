@@ -798,15 +798,12 @@
             .four.wide.column
               button.ui.green.inverted.basic.button(ng-class="{'loading': loginSubmitted == true}", ng-disabled="loginForm.$invalid", ng-click="login()") Submit
             .four.wide.column
-              .error(ng-show="loginForm.email.$touched && loginForm.email.$invalid") Invalid Email
+              .error(ng-show="loginForm.email.$dirty && loginForm.email.$invalid") Invalid Email
               .error(ng-show="invalidPassword") Invalid Password or Email
             .four.wide.column
               .error(ng-show="loginForm.password.$touched && loginForm.password.$invalid") Password too short
   .actions
-    .two.fluid.ui.inverted.buttons
+    .one.fluid.ui.inverted.buttons
       a.ui.facebook.button(href="//localhost:3000/auth/facebook")
         i.facebook.icon
         |         Facebook
-      .ui.instagram.button
-        i.instagram.icon
-        |         Instagram

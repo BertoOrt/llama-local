@@ -43,13 +43,14 @@ app.factory('AuthUser', ['$http', '$location', 'ipCookie', '$q', function ($http
     return true
   };
   authuser.authenticate = function () {
-    var id = $location.path();
+    var promise = $q.defer();
+    var url = $location.path().substring(1);
     var cookie = ipCookie('user');
-    var data = {id, cookie};
+    var data = {url, cookie};
     $http.post('//localhost:3000/user/auth', data)
       .success(function (response, stat) {
         if (response.status == "ok") {
-          return true
+          return promise.resolve(true)
         } else {
           return false
         }
@@ -57,7 +58,7 @@ app.factory('AuthUser', ['$http', '$location', 'ipCookie', '$q', function ($http
       .error(function (data) {
         return false
       })
-    return false;
+    return promise.promise;
   }
   return authuser
 }])

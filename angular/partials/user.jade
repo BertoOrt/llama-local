@@ -22,10 +22,10 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     a.item(ng-click="sidebar()" data-tab="world")
       i.users.icon
       | Connections
-    a.item(ng-click="sidebar()" data-tab="settings")
+    a.item(ng-show="owner" ng-click="sidebar()" data-tab="settings")
       i.settings.icon
       | Settings
-    a.item(href="//localhost:3000/logout")
+    a.item(ng-show="loggedIn" href="//localhost:3000/logout")
       i.reply.icon
       | Logout
     a(href='/')
@@ -54,10 +54,10 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
       a.item(ng-mouseover="tab()" data-tab="connections")
         i.users.icon
         | Connections
-      a.item(ng-mouseover="tab()" data-tab="settings")
+      a.item(ng-show="owner" ng-mouseover="tab()" data-tab="settings")
         i.settings.icon
         | Settings
-      a.item(ng-click="logout()" href="//localhost:3000/logout") 
+      a.item(ng-show="loggedIn" ng-click="logout()" href="//localhost:3000/logout") 
         i.reply.icon
         | Logout
       a(href='/')

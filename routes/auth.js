@@ -9,8 +9,6 @@ var passport = require('passport');
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'public_profile', 'email']}));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: '//localhost:8080/error'}), function (req, res) {
-  console.log(req.session);
-  res.cookie('user', req.user.id);
   Users.findOne({facebookId: req.user.id}).then(function (userData) {
     if (!userData) {
       console.log('not here');
@@ -23,7 +21,7 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {failure
         })
       });
     } else {
-      console.log("data: ", userData._id);
+      res.cookie('user', String(userData._id));
       res.redirect('//localhost:8080/' + userData._id.toString())
     }
   })

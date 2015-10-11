@@ -8,19 +8,10 @@ app.controller('home', ['$scope', '$http', '$location', 'AuthUser', 'ipCookie', 
   $scope.login = function () {
     $scope.loginSubmitted = true;
     var data = {email: $scope.loginEmail, password: $scope.loginPassword};
-    $http.post('//localhost:3000/login', data)
-      .success(function (response, stat) {
-        $scope.loginSubmitted = false;
-        if (response.status == "ok") {
-          $('.ui.modal').modal('hide all');
-          $location.path('/'+ response.id)
-        } else {
-          $scope.invalidPassword = true;
-        }
-      })
-      .error(function (data) {
-        $location.path('/error')
-      })
+    var result = AuthUser.login(data);
+    if (result) {
+      $scope.invalidPassword = true;
+    }
   };
 }])
 
@@ -46,8 +37,6 @@ app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser'
       } else {
         $scope.submitted = false;
       }
-    }, function () {
-      console.log('not resoloved');
     })
   };
   $scope.login = function () {
@@ -66,7 +55,9 @@ app.controller('search', ['$scope', function ($scope) {
 
 app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', function ($scope, $http, ipCookie, $location, AuthUser) {
   $scope.loggedIn = AuthUser.check()
-  $scope.owner = AuthUser.authenticate()
+  AuthUser.authenticate().then(function (result) {
+    $scope.owner = result
+  })
   $scope.addingReview = false;
   $scope.addingPost = false;
   $scope.isChecked = 1;
@@ -81,7 +72,6 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         $scope.user.headline = response.body.headline
         $scope.user.language = response.body.language
       } else {
-        console.log('hhhhh');
         $location.path('/')
       }
     })
@@ -112,7 +102,6 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   }
   $scope.submitBioForm = function () {
     var country = $('.countryDropdown').text();
-    console.log(country);
     if (country !== "Select Country") {
       $scope.user.country = country
     };
@@ -126,14 +115,12 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
           setTimeout(function () {
             $('.message').fadeOut()
           }, 3000);
-          console.log('flash message');
         } else {
-          console.log('error');
+          console.log('error: could not save');
         }
       })
       .error(function (data) {
         $location.path('/error')
       })
-    console.log('info: ', $scope.user);
   }
 }])
