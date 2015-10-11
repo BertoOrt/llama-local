@@ -25,6 +25,7 @@ app.factory('AuthUser', ['$http', '$location', 'ipCookie', '$q', function ($http
       .success(function (response, stat) {
         if (response.status == "ok") {
           $('.ui.modal').modal('hide all');
+          ipCookie('user', response.id)
           $location.path('/'+ response.id)
         } else {
           return true
@@ -43,8 +44,8 @@ app.factory('AuthUser', ['$http', '$location', 'ipCookie', '$q', function ($http
   };
   authuser.authenticate = function () {
     var id = $location.path();
-    var cookie = ipCookie('user')
-    var data = {id, cookie}
+    var cookie = ipCookie('user');
+    var data = {id, cookie};
     $http.post('//localhost:3000/user/auth', data)
       .success(function (response, stat) {
         if (response.status == "ok") {

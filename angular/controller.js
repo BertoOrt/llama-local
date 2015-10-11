@@ -1,7 +1,5 @@
 app.controller('home', ['$scope', '$http', '$location', 'AuthUser', 'ipCookie', function ($scope, $http, $location, AuthUser, ipCookie) {
   $scope.loggedIn = AuthUser.check()
-  console.log(ipCookie('user'));
-  console.log($scope.loggedIn);
   if ($scope.loggedIn) $scope.userId = ipCookie('user')
   $scope.modal = function () {
     $('.ui.basic.modal.home')
@@ -73,7 +71,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   $scope.addingPost = false;
   $scope.isChecked = 1;
   $scope.user = {id: ipCookie('user')}
-  $http.post('//localhost:3000/user/info', {id: $scope.user.id})
+  $http.post('//localhost:3000/user/info', {id: $scope.user.id, url: $location.path().substring(1)})
     .success(function (response, stat) {
       if (response.status == "ok") {
         $scope.user.name = response.body.name
@@ -83,7 +81,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         $scope.user.headline = response.body.headline
         $scope.user.language = response.body.language
       } else {
-        console.log('no user');
+        console.log('hhhhh');
         $location.path('/')
       }
     })

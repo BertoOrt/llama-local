@@ -7,9 +7,18 @@ var World = db.get('world');
 
 router.post('/info', function(req, res, next) {
   var id = req.body.id
-  Users.findOne({_id: id}).then(function (data) {
+  var url = req.body.url
+  var query = {reference: url}
+  if (id) query = {_id: id}
+  Users.findOne(query).then(function (data) {
     if (!data) {
-      res.json({status: "error", body: "sorry, nothing found"})
+      Users.findOne({_id: url}).then(function (user) {
+        if (!user) {
+          res.json({status: "error", body: "sorry, nothing found"})
+        } else {
+          res.json({status: "ok", body: user})
+        }
+      })
     } else {
       res.json({status: "ok", body: data})
     }
@@ -31,11 +40,28 @@ router.post('/auth', function (req, res, next) {
 
 router.post('/world', function(req, res, next) {
   var id = req.body.id
-  World.findOne({userId: id}).then(function (data) {
+  var url = req.body.url
+  var query = {reference: url}
+  if (id) query = {_id: id}
+  Users.findOne(query).then(function (data) {
     if (!data) {
-      res.json({status: "error", body: "sorry, nothing found"})
+      Users.findOne({_id: url}).then(function (user) {
+        World.findOne({userId: String(user._id)}).then(function (world) {
+          if (!world) {
+            res.json({status: "error", body: "sorry, nothing found"})
+          } else {
+            res.json({status: "ok", body: world})
+          }
+        })
+      })
     } else {
-      res.json({status: "ok", body: data})
+      World.findOne({userId: data._id}).then(function (map) {
+        if (!map) {
+          res.json({status: "error", body: "sorry, nothing found"})
+        } else {
+          res.json({status: "ok", body: map})
+        }
+      })
     }
   })
 });

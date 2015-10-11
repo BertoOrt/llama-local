@@ -304,7 +304,10 @@ if (mapElement) {
 var personalMapElement = document.getElementById('personalMap');
 if (personalMapElement) {
   var id = $.cookie('user');
-  $.post('//localhost:3000/user/world', {id: id}).then(function (data) {
+  var url = window.location.pathname.substring(1)
+  console.log(url);
+  $.post('//localhost:3000/user/world', {id, url}).then(function (data) {
+    console.log(data);
     var defaultData = countries;
     var fillIndex = {
       "1": "authorHasTraveledTo",
