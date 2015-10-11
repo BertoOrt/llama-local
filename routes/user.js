@@ -24,6 +24,11 @@ router.post('/editInfo', function(req, res, next) {
   })
 });
 
+router.post('/auth', function (req, res, next) {
+  console.log(req.body.id, req.body.cookie);
+  res.json({status: "ok"})
+})
+
 router.post('/world', function(req, res, next) {
   var id = req.body.id
   World.findOne({userId: id}).then(function (data) {

@@ -1,4 +1,8 @@
-app.controller('home', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+app.controller('home', ['$scope', '$http', '$location', 'AuthUser', 'ipCookie', function ($scope, $http, $location, AuthUser, ipCookie) {
+  $scope.loggedIn = AuthUser.check()
+  console.log(ipCookie('user'));
+  console.log($scope.loggedIn);
+  if ($scope.loggedIn) $scope.userId = ipCookie('user')
   $scope.modal = function () {
     $('.ui.basic.modal.home')
     .modal('show');
@@ -23,6 +27,8 @@ app.controller('home', ['$scope', '$http', '$location', function ($scope, $http,
 }])
 
 app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser', function ($scope, $http, $location, ipCookie, AuthUser) {
+  $scope.loggedIn = AuthUser.check()
+  if ($scope.loggedIn) $location.path('/')
   $scope.modal = function () {
     $('.ui.basic.modal.signup')
     .modal('show');
@@ -34,13 +40,17 @@ app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser'
       country = "United States"
     };
     var data = {email: $scope.email, country: country, password: $scope.password};
-    var result = AuthUser.signup(data);
-    if (result) {
-      $scope.invalidEmail = true
-    } else {
-      $scope.submitted = false;
-    }
-    console.log(AuthUser.check());
+    $scope.submitted = true;
+    AuthUser.signup(data).then(function (result) {
+      if (result) {
+        $scope.submitted = false;
+        $scope.invalidEmail = true
+      } else {
+        $scope.submitted = false;
+      }
+    }, function () {
+      console.log('not resoloved');
+    })
   };
   $scope.login = function () {
     $scope.loginSubmitted = true;
@@ -49,15 +59,16 @@ app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser'
     if (result) {
       $scope.invalidPassword = true;
     }
-    console.log(AuthUser.check());
   };
 }])
 
 app.controller('search', ['$scope', function ($scope) {
-  $scope.apple = "apple";
+  $scope.loggedIn = AuthUser.check()
 }])
 
 app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', function ($scope, $http, ipCookie, $location, AuthUser) {
+  $scope.loggedIn = AuthUser.check()
+  $scope.owner = AuthUser.authenticate()
   $scope.addingReview = false;
   $scope.addingPost = false;
   $scope.isChecked = 1;
@@ -72,7 +83,8 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         $scope.user.headline = response.body.headline
         $scope.user.language = response.body.language
       } else {
-        console.log('error');
+        console.log('no user');
+        $location.path('/')
       }
     })
     .error(function (data) {

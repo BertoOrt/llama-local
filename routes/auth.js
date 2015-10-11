@@ -34,7 +34,9 @@ router.post('/signup', function(req, res, next) {
   var country = req.body.country;
   var password = bcrypt.hashSync(req.body.password, 8);
   Users.findOne({email: email}).then(function (data) {
+    console.log('baby');
     if (!data) {
+      console.log('stemps');
       Users.insert({email: email, country: country, password: password, headline: "Bienvenidos!",
        about: "I'm a new llama. Click settings to edit info.", language: "English", name: "Llama"}).then(function (data) {
         var id = data._id.toString()
@@ -43,6 +45,7 @@ router.post('/signup', function(req, res, next) {
         })
       });
     } else {
+      console.log(data);
       res.json({status: "error"})
     }
   })

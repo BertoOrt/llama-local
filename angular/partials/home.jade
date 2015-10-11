@@ -3,9 +3,11 @@
     .title
       a(href='/')
         img(class='logo', src='./images/llama.png')
-    .nav-tabs
+    .nav-tabs(ng-hide="loggedIn")
       a(class='tabs' href='/signup') Join
       a(ng-click="modal()" class='tabs' href='#') Log In
+    .nav-tabs(ng-show="loggedIn")
+      a(class='tabs' ng-href='/{{userId}}') My Site
 .landing
   .container
     .intro
