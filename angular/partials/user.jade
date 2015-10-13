@@ -13,12 +13,12 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     a.item(ng-click="sidebar()" data-tab="badges")
       i.empty.star.icon
       | References
-    a.item(ng-click="sidebar()" data-tab="blog")
-      i.list.layout.icon
-      | Blog
-    a.item(ng-click="sidebar()" data-tab="conversations")
-      i.comments.icon
-      | Conversations
+    //- a.item(ng-click="sidebar()" data-tab="blog")
+    //-   i.list.layout.icon
+    //-   | Blog
+    //- a.item(ng-click="sidebar()" data-tab="conversations")
+    //-   i.comments.icon
+    //-   | Conversations
     a.item(ng-click="sidebar()" data-tab="world")
       i.users.icon
       | Connections
@@ -45,12 +45,12 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
       a.item(ng-mouseover="tab()" data-tab="badges")
         i.empty.star.icon
         | References
-      a.item(ng-mouseover="tab()" data-tab="blog")
-        i.list.layout.icon
-        | Blog
-      a.item(ng-mouseover="tab()" data-tab="conversations")
-        i.comments.icon
-        | Conversations
+      //- a.item(ng-mouseover="tab()" data-tab="blog")
+      //-   i.list.layout.icon
+      //-   | Blog
+      //- a.item(ng-mouseover="tab()" data-tab="conversations")
+      //-   i.comments.icon
+      //-   | Conversations
       a.item(ng-mouseover="tab()" data-tab="connections")
         i.users.icon
         | Connections
@@ -193,47 +193,25 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
           | Cancel
       .ui.violet.button(ng-click='addReviewForm()', ng-show='!addingReview')
         | Add A Review
-    .ui.tab.display(data-tab="packages")
+    .ui.tab.display(data-tab="packages")  
       .ui.top.attached.tabular.menu
-        a.item.active(ng-mouseover="pacTab()" data-tab='first') One
-        a.item(ng-mouseover="pacTab()" data-tab='second') Two
-        a.item(ng-mouseover="pacTab()" data-tab='third') Three
-      .ui.bottom.attached.tab.segment.active(data-tab='first')
+        a.item(ng-repeat="package in user.packages" ng-class="{active: $index === 0}" ng-mouseover="pacTab()" data-tab='{{$index}}') {{package.name}}
+      .ui.bottom.attached.tab.segment(ng-repeat="package in user.packages" ng-class="{active: $index === 0}" data-tab='{{$index}}')
         .ui.sixteen.column.grid
           .row
             .sixteen.wide.column.profile
               table
                 tr
                   td
-                    h4 Name: 
-                  td 
-                    | Let me show you 
-                tr
-                  td
                     h4 Price: 
-                  td 
-                    | $ 10
-                tr
-                  td
-                    h4 Benefits:
-                  td 
-                    ul
-                      li Transportation
-                      li Hospitality
-                      li Clubs
-                      li Sight Seeing
+                  td {{package.price}}
                 tr
                   td
                     h4 Description:
                   td
           .row
             .sixteen.wide.column
-              .ui.segment
-                | I'll show you around town, go to the hotest clubs, have fun
-      .ui.bottom.attached.tab.segment(data-tab='second')
-        | Second Package
-      .ui.bottom.attached.tab.segment(data-tab='third')
-        | Third Package
+              .ui.segment {{package.about}}
     .ui.tab.display(data-tab="blog")
       .ui.comments.blog
         .comment
@@ -348,19 +326,36 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
           i.icon.edit
           |  Send
     .ui.tab.display(data-tab="settings")
-      .ui.success.message#bioSuccessMessage
+      .ui.success.message.bioMessage#successMessage
         i.close.icon
         .header
           | Success!
         p Your Bio has been saved
+      .ui.success.message.packageMessage#successMessage
+        i.close.icon
+        .header
+          | Success!
+        p Your Package has been saved
+      h1 Preferences
+      form(name="urlForm")
+        .ui.labeled.input
+          .ui.label
+            | http://development.llama-local.divshot.io/
+          input(type='text' name="url" ng-model="url" required)
+        button.ui.button.changeButton.purple(type="submit" ng-disabled="urlForm.$invalid" ng-click="changeUrl()")
+          | Change
+        .taken.error(ng-show="taken")
+          | Name already taken
       h1 Edit
       .ui.styled.accordion
         .title.bioTab
           i.dropdown.icon
           |     Bio
         .content
-          .transition.hidden
+          .transition.visible
             form(name="editBioForm").ui.reply.form
+              .field
+                input(type="text" name='headline' ng-model="user.headline" placeholder="Headline" required)
               .field
                 input(type="text" name='name' ng-model="user.name" placeholder="Name" required)
               .field
@@ -1104,39 +1099,37 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
               .ui.blue.labeled.submit.icon.button(ng-class="{loading: sendingInfo}" ng-click="submitBioForm()" ng-disabled="editBioForm.$invalid")
                 i.icon.edit
                 |  Save
-        .title
+        .title.packageTab
           i.dropdown.icon
           |     Packages
         .content
           .transition.visible
-            h3 Package One
-            form.ui.reply.form
-              .field
-                textarea
-              .ui.blue.labeled.submit.icon.button
-                i.icon.edit
-                |  Add Package
-            h3 Package Two
-            form.ui.reply.form
-              .field
-                textarea
-              .ui.blue.labeled.submit.icon.button
-                i.icon.edit
-                |  Add Package
-            h3 Package Three
-            form.ui.reply.form
-              .field
-                textarea
-              .ui.blue.labeled.submit.icon.button
-                i.icon.edit
-                |  Add Package
-        .title
-          i.dropdown.icon
-          |     My World
-        .content
-          p.transition.visible(style='display: block !important;')
-            | Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.
-          p.transition.visible(style='display: block !important;')
-            | A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.
-
+            .packages(ng-repeat="package in user.packages")
+              h3 {{package.name}}
+              form(name="editPackages").ui.reply.form
+                .field
+                  input(type="text" name='name' ng-model="package.name" placeholder="Name" ng-value="package.name" required)
+                .field
+                  input(type="text" name='price' ng-model="package.price" placeholder="Price" ng-value="package.price" required)
+                .field
+                  textarea(name="about" ng-model="package.about" placeholder="Description" required) {{package.about}}
+                button.ui.blue.submit.button(ng-class="{loading: sendingInfo}" ng-click="editPackage()" ng-disabled="editPackages.$invalid")
+                  | Edit
+                button.ui.purple.button(ng-click="removePackage()")
+                  | Remove
+            button.ui.blue.button(ng-click="togglePackageForm()" ng-hide="newPackage")
+              | New
+            .newPackage(ng-show="newPackage")
+              h3 New Package
+              form(name="editPackageForm").ui.reply.form
+                .field
+                  input(type="text" name='name' ng-model="package.name" placeholder="Name" required)
+                .field
+                  input(type="text" name='price' ng-model="package.price" placeholder="Price" required)
+                .field
+                  textarea(name="about" ng-model="package.about" placeholder="Description" required)
+                button.ui.blue.submit.button(ng-class="{loading: sendingInfo}" ng-click="submitPackageForm()" ng-disabled="editPackageForm.$invalid")
+                  | Save
+                button.ui.blue.button(ng-click="togglePackageForm()")
+                  | Cancel
 script(src='/map/allmap.min.js')

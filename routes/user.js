@@ -32,10 +32,16 @@ router.post('/editInfo', function(req, res, next) {
   })
 });
 
+router.post('/package', function(req, res, next) {
+  var data = {id: new Date().getTime(), name: req.body.package.name, price: req.body.package.price, about: req.body.package.about}
+  Users.update({_id: req.body.id}, {$push: {packages: data} }).then(function (data) {
+    res.json({status: "ok", body: "data"})
+  })
+});
+
 router.post('/auth', function (req, res, next) {
   var url = req.body.url
   Users.findOne({_id: req.body.cookie}).then(function (data) {
-    console.log('check', String(data._id),typeof data._id, url, typeof url, String(data._id) === url);
     if (data.reference === url || String(data._id) === url) {
       res.json({status: "ok"})
     } else {
@@ -82,5 +88,37 @@ router.post('/update/world', function(req, res, next) {
     res.json({status: "ok", body: data})
   })
 });
+
+router.post('/url', function (req, res, next) {
+  var id = req.body.id;
+  var url = req.body.url;
+  Users.findOne({reference: url}).then(function (data) {
+    if (!data) {
+      Users.update({_id: id}, {$set: {reference: url}}).then(function () {
+        Users.findOne({_id: id}).then(function (user) {
+          res.json({status: "ok", reference: user.reference})
+        })
+      })
+    } else {
+      res.json({status: "taken"})
+    }
+  })
+})
+
+router.post('/editPackage', function (req, res, next) {
+  Users.update({_id: req.body.id, "packages.id": req.body.package.id}, {$set: {"packages.$.name": req.body.package.name,
+    "packages.$.price": req.body.package.price, "packages.$.about": req.body.package.about}}).then(function (data) {
+      console.log(data);
+      res.json({status: "ok"})
+    })
+})
+
+router.post('/removePackage', function (req, res, next) {
+  console.log(req.body.package.id);
+  Users.update({_id: req.body.id}, {$pull: {packages: {id: req.body.package.id}}}).then(function (data) {
+    console.log(data);
+    res.json({status: "ok", body: data})
+  })
+})
 
 module.exports = router;
