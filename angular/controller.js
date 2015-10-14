@@ -13,6 +13,9 @@ app.controller('home', ['$scope', '$http', '$location', 'AuthUser', 'ipCookie', 
       $scope.invalidPassword = true;
     }
   };
+  $scope.email = function () {
+    $('.ui.modal.email').modal('show');
+  }
 }])
 
 app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser', function ($scope, $http, $location, ipCookie, AuthUser) {
@@ -49,8 +52,24 @@ app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser'
   };
 }])
 
-app.controller('search', ['$scope', function ($scope) {
+app.controller('search', ['$scope', 'AuthUser', '$http', '$location', function ($scope, AuthUser, $http, $location) {
   $scope.loggedIn = AuthUser.check()
+  $scope.search = $location.search().country
+  $http.post('//localhost:3000/users')
+    .success(function (response) {
+      console.log(response);
+      var search = $location.search().country.toLowerCase().split(' ')[0]
+      $scope.users = []
+      response.body.forEach(function (user) {
+        if (user.country && user.country.toLowerCase().indexOf(search) > -1) {
+          $scope.users.push(user)
+        }
+      })
+      console.log($scope.users);
+    })
+    .error(function () {
+      $location.path('/error')
+    })
 }])
 
 app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', function ($scope, $http, ipCookie, $location, AuthUser) {
@@ -75,11 +94,11 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         $scope.user.language = response.body.language
         $scope.user.packages = response.body.packages
         $scope.user.reviews = response.body.reviews
-        if ($scope.user.packages.length == 0) {
+        if (!$scope.user.packages) {
           $scope.noPackages = true;
           $scope.user.packages = [];
         }
-        if ($scope.user.reviews.length == 0) {
+        if (!$scope.user.reviews) {
           $scope.noReviews = true;
           $scope.user.reviews = [];
         }

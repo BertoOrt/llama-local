@@ -1,9 +1,20 @@
-.navbar-fixed.nav
-  .container
-    .title
-      a(href='/')
-        img(class='logo', src='./images/llama.png')
-    .nav-tabs
-      a(class='tabs' href='/signup') Join
-      a(class='tabs' href='#') Log In
-h1 Searching...
+.searchBackground
+  .nav
+    .container
+      .title
+        a(href='/')
+          img(class='logo', src='./images/llama.png')
+      .nav-tabs(ng-hide="loggedIn")
+        a(class='tabs' href='/signup') Join
+        a(ng-click="modal()" class='tabs' href='#') Log In
+      .nav-tabs(ng-show="loggedIn")
+        a(class='tabs' ng-href='/{{userId}}') My Site
+  .search
+    .container
+      h2.searchTitle Search Results for {{search}}
+      .ui.massive.aligned.animated.list
+        .item(ng-repeat="user in users")
+          a(ng-href="/{{user._id}}")
+            img.ui.avatar.image(src='http://orig08.deviantart.net/b97a/f/2013/045/1/e/profile_picture_by_llama_giver_123-d5uwh54.jpg')
+            .content
+              .header {{user.name}}

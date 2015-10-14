@@ -27,6 +27,12 @@
 h1.mapTitle Find A Llama
 #map
 #particles-js
+  .contact
+    h2 Let's connect the world...
+    h4.rightText ... one Llama at a time
+    .centered
+      p Contact Us!
+      i.mail.icon.big.emailModal(ng-click="email()")
 .footer
   .container
     .footerNav
@@ -66,5 +72,23 @@ h1.mapTitle Find A Llama
       a.ui.facebook.button(href="//localhost:3000/auth/facebook")
         i.facebook.icon
         |         Facebook
+.ui.modal.email
+  i.close.icon
+  .header
+    | Send Us An Email
+  .content
+    .ui.form
+      .field
+        input(type='email' placeholder="Email")
+      .field
+        input(type='text' placeholder="Subject")
+      .field
+        textarea(placeholder="Go ahead, let it all out...")
+  .actions
+    .ui.black.deny.button
+      | Nevermind
+    .ui.positive.right.labeled.icon.button
+      | Send
+      i.checkmark.icon
 script(src='/map/allmap.min.js')
 script(src='/particles/allparticles.min.js')
