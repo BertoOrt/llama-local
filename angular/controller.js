@@ -67,7 +67,6 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   $http.post('//localhost:3000/user/info', {id: $scope.user.id, url: $location.path().substring(1)})
     .success(function (response, stat) {
       if (response.status == "ok") {
-        console.log(response.body);
         $scope.user.name = response.body.name
         $scope.user.country = response.body.country
         $scope.user.email = response.body.email
@@ -75,8 +74,14 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         $scope.user.headline = response.body.headline
         $scope.user.language = response.body.language
         $scope.user.packages = response.body.packages
-        if (!$scope.user.packages) {
+        $scope.user.reviews = response.body.reviews
+        if ($scope.user.packages.length == 0) {
+          $scope.noPackages = true;
           $scope.user.packages = [];
+        }
+        if ($scope.user.reviews.length == 0) {
+          $scope.noReviews = true;
+          $scope.user.reviews = [];
         }
         if (response.body.reference) {
           $location.path('/' + response.body.reference)
@@ -135,6 +140,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   }
   $scope.submitPackageForm = function () {
     $scope.sendingInfo = true;
+    $scope.noPackages = false;
     $scope.user.packages.push($scope.package);
     $http.post('//localhost:3000/user/package', {id: ipCookie('user'), package: $scope.package})
       .success(function (response, stat) {
@@ -168,7 +174,6 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
       })
   };
   $scope.editPackage = function () {
-    console.log(this.package);
     $http.post('//localhost:3000/user/editPackage', {id: ipCookie('user'), package: this.package})
       .success(function (response, stat) {
         $scope.sendingInfo = false;
@@ -199,6 +204,20 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         } else {
           console.log('error: could not save');
         }
+      })
+      .error(function (data) {
+        $location.path('/error')
+      })
+  }
+  $scope.submitReview = function () {
+    $scope.addingReview = !$scope.addingReview;
+    $scope.user.reviews.push({badge: $scope.isChecked, review: $scope.reviewText, by: ipCookie('user'), byName: 'You!'})
+    console.log('submitted', $scope.isChecked, $scope.reviewText);
+    $scope.noReviews = false;
+    $http.post('//localhost:3000/user/addReview', {id: ipCookie('user'), reference: $location.path().substring(1), badge: $scope.isChecked, review: $scope.reviewText})
+      .success(function (response) {
+        $scope.isChecked = '';
+        $scope.reviewText = '';
       })
       .error(function (data) {
         $location.path('/error')

@@ -19,9 +19,9 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     //- a.item(ng-click="sidebar()" data-tab="conversations")
     //-   i.comments.icon
     //-   | Conversations
-    a.item(ng-click="sidebar()" data-tab="world")
-      i.users.icon
-      | Connections
+    //- a.item(ng-click="sidebar()" data-tab="world")
+    //-   i.users.icon
+    //-   | Connections
     a.item(ng-show="owner" ng-click="sidebar()" data-tab="settings")
       i.settings.icon
       | Settings
@@ -51,9 +51,9 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
       //- a.item(ng-mouseover="tab()" data-tab="conversations")
       //-   i.comments.icon
       //-   | Conversations
-      a.item(ng-mouseover="tab()" data-tab="connections")
-        i.users.icon
-        | Connections
+      //- a.item(ng-mouseover="tab()" data-tab="connections")
+      //-   i.users.icon
+      //-   | Connections
       a.item(ng-show="owner" ng-mouseover="tab()" data-tab="settings")
         i.settings.icon
         | Settings
@@ -115,86 +115,64 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
                   | Someday
             #personalMap
     .ui.tab.display(data-tab="badges")
-      h3 These are my reviews
+      h3 Reviews
       .ui.items
-        .item
+        .item(ng-repeat="review in user.reviews")
           .givenBadge
-            i.student.icon.ui.big
+            i.icon.ui.big(ng-class="review.badge")
           .content
-            a.header Stevie Feliciano
+            a.header(ng-href="/{{review.by}}") {{review.byName}}
             .description
-              p
-                | Stevie Feliciano is a 
-                a library scientist
-                |  living in New York City. She likes to spend her time reading, running, and writing.
-        .item
-          .givenBadge
-            i.spy.icon.ui.big
-          .content
-            a.header Veronika Ossi
-            .description
-              p
-                | Veronika Ossi is a set designer living in New York who 
-                a enjoys
-                |  kittens, music, and partying.
-        .item
-          .givenBadge
-            i.heart.icon.ui.big
-          .content
-            a.header Jenny Hess
-            .description
-              p
-                | Jenny is a student studying Media Management at 
-                a the New School
-                | .
-      form.ui.reply.form(ng-show="addingReview")
-        h3 New Review
-        .field
-          .ui.segment
-            label(for="coffee" ng-class="{'selectedBadge': isChecked == 1}")
-              i.big.badge.coffee.icon
-              input.badgeRadio(id='coffee' type='radio' ng-model='isChecked' name='badge' value='1')
-            label(for="food" ng-class="{'selectedBadge': isChecked == 2}")
-              i.big.badge.food.icon
-              input.badgeRadio(id='food' type='radio' ng-model='isChecked' name='badge' value='2')
-            label(for="heart" ng-class="{'selectedBadge': isChecked== 3}")
-              i.big.badge.heart.icon
-            input.badgeRadio(id='heart' type='radio' ng-model='isChecked' value='3' name='badge')
-            label(for="angellist" ng-class="{'selectedBadge': isChecked== 4}")
-              i.big.badge.angellist.icon
-            input.badgeRadio(id='angellist' type='radio' ng-model='isChecked' value='4' name='badge')
-            label(for="thumbsdown" ng-class="{'selectedBadge': isChecked== 5}")
-              i.big.badge.thumbs.down.icon
-            input.badgeRadio(id='thumbsdown' type='radio' ng-model='isChecked' value='5' name='badge')
-            label(for="spy" ng-class="{'selectedBadge': isChecked== 6}")
-              i.big.badge.spy.icon
-            input.badgeRadio(id='spy' type='radio' ng-model='isChecked' value='6' name='badge')
-            label(for="cameraretro" ng-class="{'selectedBadge': isChecked== 7}")
-              i.big.badge.camera.retro.icon
-            input.badgeRadio(id='cameraretro' type='radio' ng-model='isChecked' value='7' name='badge')
-            label(for="trophy" ng-class="{'selectedBadge': isChecked== 8}")
-              i.big.badge.trophy.icon
-            input.badgeRadio(id='trophy' type='radio' ng-model='isChecked' value='8' name='badge')
-            label(for="map" ng-class="{'selectedBadge': isChecked== 9}")
-              i.big.badge.map.icon
-            input.badgeRadio(id='map' type='radio' ng-model='isChecked' value='9' name='badge')
-            label(for="money" ng-class="{'selectedBadge': isChecked== 10}")
-              i.big.badge.money.icon
-            input.badgeRadio(id='money' type='radio' ng-model='isChecked' value='10' name='badge')
-            label(for="student" ng-class="{'selectedBadge': isChecked== 11}")
-              i.big.badge.student.icon
-            input.badgeRadio(id='student' type='radio' ng-model='isChecked' value='11' name='badge')
-        .field
-          textarea
-        .ui.labeled.icon.violet.button
-          i.icon.edit
-          |  Add Review
-        .ui.violet.button(ng-click='addReviewForm()')
-          | Cancel
-      .ui.violet.button(ng-click='addReviewForm()', ng-show='!addingReview')
-        | Add A Review
+              p {{review.review}}
+      h4(ng-show='noReviews') No Reviews Added
+      .reviewForm(ng-show="!owner && loggedIn")
+        form.ui.reply.form(name="reviewForm", ng-show="addingReview")
+          h3 New Review
+          .field
+            .ui.segment
+              h2.badgeTitle Badge: 
+              label(for="coffee" ng-class="{'selectedBadge': isChecked == 'coffee'}")
+                i.big.badge.coffee.icon
+                input.badgeRadio(id='coffee' type='radio' ng-model='isChecked' name='badge' value='coffee')
+              label(for="food" ng-class="{'selectedBadge': isChecked == 'food'}")
+                i.big.badge.food.icon
+                input.badgeRadio(id='food' type='radio' ng-model='isChecked' name='badge' value='food')
+              label(for="heart" ng-class="{'selectedBadge': isChecked== 'heart'}")
+                i.big.badge.heart.icon
+              input.badgeRadio(id='heart' type='radio' ng-model='isChecked' value='heart' name='badge')
+              label(for="angellist" ng-class="{'selectedBadge': isChecked== 'angellist'}")
+                i.big.badge.angellist.icon
+              input.badgeRadio(id='angellist' type='radio' ng-model='isChecked' value='angellist' name='badge')
+              label(for="spy" ng-class="{'selectedBadge': isChecked== 'spy'}")
+                i.big.badge.spy.icon
+              input.badgeRadio(id='spy' type='radio' ng-model='isChecked' value='spy' name='badge')
+              label(for="cameraretro" ng-class="{'selectedBadge': isChecked== 'camera'}")
+                i.big.badge.camera.icon
+              input.badgeRadio(id='cameraretro' type='radio' ng-model='isChecked' value='camera' name='badge')
+              label(for="trophy" ng-class="{'selectedBadge': isChecked== 'trophy'}")
+                i.big.badge.trophy.icon
+              input.badgeRadio(id='trophy' type='radio' ng-model='isChecked' value='trophy' name='badge')
+              label(for="map" ng-class="{'selectedBadge': isChecked== 'map'}")
+                i.big.badge.map.icon
+              input.badgeRadio(id='map' type='radio' ng-model='isChecked' value='map' name='badge')
+              label(for="money" ng-class="{'selectedBadge': isChecked== 'money'}")
+                i.big.badge.money.icon
+              input.badgeRadio(id='money' type='radio' ng-model='isChecked' value='money' name='badge')
+              label(for="student" ng-class="{'selectedBadge': isChecked== 'student'}")
+                i.big.badge.student.icon
+              input.badgeRadio(id='student' type='radio' ng-model='isChecked' value='student' name='badge')
+          .field
+            textarea(ng-model="reviewText" name="reviewText")
+          .ui.labeled.icon.violet.button(ng-click="submitReview()")
+            i.icon.edit
+            |  Add Review
+          .ui.violet.button(ng-click='addReviewForm()')
+            | Cancel
+        .ui.violet.button(ng-click='addReviewForm()', ng-show='!addingReview')
+          | Add A Review
     .ui.tab.display(data-tab="packages")  
       .ui.top.attached.tabular.menu
+        a.item(ng-show="noPackages") No Packages
         a.item(ng-repeat="package in user.packages" ng-class="{active: $index === 0}" ng-mouseover="pacTab()" data-tab='{{$index}}') {{package.name}}
       .ui.bottom.attached.tab.segment(ng-repeat="package in user.packages" ng-class="{active: $index === 0}" data-tab='{{$index}}')
         .ui.sixteen.column.grid

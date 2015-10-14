@@ -8,7 +8,6 @@ router.post('/info', function(req, res, next) {
   var id = req.body.id
   var url = req.body.url
   var query = {reference: url}
-  if (id) query = {_id: id}
   Users.findOne(query).then(function (data) {
     if (!data) {
       Users.findOne({_id: url}).then(function (user) {
@@ -28,14 +27,14 @@ router.post('/editInfo', function(req, res, next) {
   var id = req.body.id
   delete req.body.id;
   Users.update({_id: id}, {$set: req.body }).then(function (data) {
-    res.json({status: "ok", body: "data"})
+    res.json({status: "ok", body: data})
   })
 });
 
 router.post('/package', function(req, res, next) {
   var data = {id: new Date().getTime(), name: req.body.package.name, price: req.body.package.price, about: req.body.package.about}
-  Users.update({_id: req.body.id}, {$push: {packages: data} }).then(function (data) {
-    res.json({status: "ok", body: "data"})
+  Users.update({_id: req.body.id}, {$push: {packages: data} }).then(function (result) {
+    res.json({status: "ok", body: result})
   })
 });
 
@@ -108,7 +107,6 @@ router.post('/url', function (req, res, next) {
 router.post('/editPackage', function (req, res, next) {
   Users.update({_id: req.body.id, "packages.id": req.body.package.id}, {$set: {"packages.$.name": req.body.package.name,
     "packages.$.price": req.body.package.price, "packages.$.about": req.body.package.about}}).then(function (data) {
-      console.log(data);
       res.json({status: "ok"})
     })
 })
@@ -116,8 +114,26 @@ router.post('/editPackage', function (req, res, next) {
 router.post('/removePackage', function (req, res, next) {
   console.log(req.body.package.id);
   Users.update({_id: req.body.id}, {$pull: {packages: {id: req.body.package.id}}}).then(function (data) {
-    console.log(data);
     res.json({status: "ok", body: data})
+  })
+})
+
+router.post('/addReview', function (req, res, next) {
+  console.log(req.body);
+  var data = {review: req.body.review, badge: req.body.badge, by: req.body.id}
+  Users.findOne({_id: req.body.id}).then(function (by) {
+    data.byName = by.name
+    Users.findOne({reference: req.body.reference}).then(function (user) {
+      if (!user) {
+        Users.update({_id: req.body.id}, {$push: {reviews: data}}).then(function (result) {
+          res.json({status: "ok", body: result})
+        })
+      } else {
+        Users.update({_id: String(user._id)}, {$push: {reviews: data}}).then(function (result) {
+          res.json({status: "ok", body: result})
+        })
+      }
+    })
   })
 })
 
