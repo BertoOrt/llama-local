@@ -13,7 +13,7 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {failure
     if (!userData) {
       console.log('not here');
       Users.insert({facebookId: req.user.id, headline: "Bienvenido!", facebookToken: req.user.token,
-       about: "I'm a new llama. Click settings to edit info.", language: "English", name: req.user.displayName}).then(function (data) {
+       about: "I'm a new llama. Click settings to edit info.", language: "English", country: "United States", name: req.user.displayName}).then(function (data) {
         var id = data._id.toString()
         res.cookie('user', id);
         World.insert({userId: id}).then(function () {

@@ -256,49 +256,63 @@ if (mapElement) {
   $(window).on('resize', function() {
    map.resize();
   });
-  var map = new Datamap({
-    element: mapElement,
-    projection: 'mercator',
-    responsive: true,
-    fills: {
-      defaultFill: "#A39BA8",
-      authorHasTraveledTo: "#B8C5D6",
-      highlightFillColor: "#B8C5D6"
-    },
-    done: datamap => {
-      datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-        window.location.href = '/search?country=' + geography.properties.name.replace(/ /g, "-").toLowerCase()
-      });
-    },
-    data: {
-      USA: { fillKey: "authorHasTraveledTo" },
-      JPN: { fillKey: "authorHasTraveledTo" },
-      ITA: { fillKey: "authorHasTraveledTo" },
-      CRI: { fillKey: "authorHasTraveledTo" },
-      KOR: { fillKey: "authorHasTraveledTo" },
-      DEU: { fillKey: "authorHasTraveledTo" },
-    },
-    geographyConfig: {
-      highlightBorderColor: '#7d7d7d',
-      highlightBorderWidth: 1,
-      popupTemplate: (geo, data) => {
-          if (!data) {
-            data = {llamas: 0}
-            var llama = "llamas"
-          } else {
-            if (data.llamas == 1) {
-              var llama = "llama"
-            } else {
-              var llama = "llamas"
-            }
-          }
-          return ['<div class="hoverinfo"><strong>',
-            geo.properties.name, "<br>", data.llamas,
-              ' ', llama,
-              '</strong></div>'].join('');
+  $.post('//localhost:3000/users').then(function (response) {
+    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
+    var defaultData = {};
+    console.log(countries, response.body);
+    response.body.forEach(function (user) {
+      for (var i = 0; i < countries.length; i++) {
+        defaultData[countries[i].id] = defaultData[countries[i].id] || {fillKey: "defaultFill", name: countries[i].properties.name}
+        if (user.country === countries[i].properties.name) {
+          defaultData[countries[i].id].value = defaultData[countries[i].id].value + 1 || 1
+        }
       }
-    }
-  });
+    })
+    console.log("what have i done?!", defaultData, countries);
+    var map = new Datamap({
+      element: mapElement,
+      projection: 'mercator',
+      responsive: true,
+      fills: {
+        defaultFill: "#A39BA8",
+        authorHasTraveledTo: "#B8C5D6",
+        highlightFillColor: "#B8C5D6"
+      },
+      done: datamap => {
+        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+          window.location.href = '/search?country=' + geography.properties.name.replace(/ /g, "-").toLowerCase()
+        });
+      },
+      data: {
+        USA: { fillKey: "authorHasTraveledTo" },
+        JPN: { fillKey: "authorHasTraveledTo" },
+        ITA: { fillKey: "authorHasTraveledTo" },
+        CRI: { fillKey: "authorHasTraveledTo" },
+        KOR: { fillKey: "authorHasTraveledTo" },
+        DEU: { fillKey: "authorHasTraveledTo" },
+      },
+      geographyConfig: {
+        highlightBorderColor: '#7d7d7d',
+        highlightBorderWidth: 1,
+        popupTemplate: (geo, data) => {
+            if (!data) {
+              data = {llamas: 0}
+              var llama = "llamas"
+            } else {
+              if (data.llamas == 1) {
+                var llama = "llama"
+              } else {
+                var llama = "llamas"
+              }
+            }
+            return ['<div class="hoverinfo"><strong>',
+              geo.properties.name, "<br>", data.llamas,
+                ' ', llama,
+                '</strong></div>'].join('');
+        }
+      }
+    });
+  })
 }
 
 var personalMapElement = document.getElementById('personalMap');
