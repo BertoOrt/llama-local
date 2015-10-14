@@ -19,7 +19,7 @@ AZE: {fillKey: "defaultFill", name: "Azerbaijan",},
 BDI: {fillKey: "defaultFill", name: "Burundi",},
 BEL: {fillKey: "defaultFill", name: "Belgium",},
 BEN: {fillKey: "defaultFill", name: "Benin",},
-BES: {fillKey: "defaultFill", name: "Bonaire, Sint Eustatius and Saba",},
+BES: {fillKey: "defaultFill", name: "Bonaire",},
 BFA: {fillKey: "defaultFill", name: "Burkina Faso",},
 BGD: {fillKey: "defaultFill", name: "Bangladesh",},
 BGR: {fillKey: "defaultFill", name: "Bulgaria",},
@@ -30,7 +30,7 @@ BLM: {fillKey: "defaultFill", name: "Saint Barthélemy",},
 BLR: {fillKey: "defaultFill", name: "Belarus",},
 BLZ: {fillKey: "defaultFill", name: "Belize",},
 BMU: {fillKey: "defaultFill", name: "Bermuda",},
-BOL: {fillKey: "defaultFill", name: "Bolivia, Plurinational State of",},
+BOL: {fillKey: "defaultFill", name: "Bolivia",},
 BRA: {fillKey: "defaultFill", name: "Brazil",},
 BRB: {fillKey: "defaultFill", name: "Barbados",},
 BRN: {fillKey: "defaultFill", name: "Brunei Darussalam",},
@@ -45,7 +45,7 @@ CHL: {fillKey: "defaultFill", name: "Chile",},
 CHN: {fillKey: "defaultFill", name: "China",},
 CIV: {fillKey: "defaultFill", name: "Côte d'Ivoire",},
 CMR: {fillKey: "defaultFill", name: "Cameroon",},
-COD: {fillKey: "defaultFill", name: "Congo, the Democratic Republic of the",},
+COD: {fillKey: "defaultFill", name: "Congo",},
 COG: {fillKey: "defaultFill", name: "Congo",},
 COK: {fillKey: "defaultFill", name: "Cook Islands",},
 COL: {fillKey: "defaultFill", name: "Colombia",},
@@ -76,7 +76,7 @@ FJI: {fillKey: "defaultFill", name: "Fiji",},
 FLK: {fillKey: "defaultFill", name: "Falkland Islands (Malvinas)",},
 FRA: {fillKey: "defaultFill", name: "France",},
 FRO: {fillKey: "defaultFill", name: "Faroe Islands",},
-FSM: {fillKey: "defaultFill", name: "Micronesia, Federated States of",},
+FSM: {fillKey: "defaultFill", name: "Micronesia",},
 GAB: {fillKey: "defaultFill", name: "Gabon",},
 GBR: {fillKey: "defaultFill", name: "United Kingdom",},
 GEO: {fillKey: "defaultFill", name: "Georgia",},
@@ -106,7 +106,7 @@ IMN: {fillKey: "defaultFill", name: "Isle of Man",},
 IND: {fillKey: "defaultFill", name: "India",},
 IOT: {fillKey: "defaultFill", name: "British Indian Ocean Territory",},
 IRL: {fillKey: "defaultFill", name: "Ireland",},
-IRN: {fillKey: "defaultFill", name: "Iran, Islamic Republic of",},
+IRN: {fillKey: "defaultFill", name: "Iran",},
 IRQ: {fillKey: "defaultFill", name: "Iraq",},
 ISL: {fillKey: "defaultFill", name: "Iceland",},
 ISR: {fillKey: "defaultFill", name: "Israel",},
@@ -123,7 +123,7 @@ KIR: {fillKey: "defaultFill", name: "Kiribati",},
 KNA: {fillKey: "defaultFill", name: "Saint Kitts and Nevis",},
 KOR: {fillKey: "defaultFill", name: "Korea, Republic of",},
 KWT: {fillKey: "defaultFill", name: "Kuwait",},
-LAO: {fillKey: "defaultFill", name: "Lao People\'s Democratic Republic",},
+LAO: {fillKey: "defaultFill", name: "Laos",},
 LBN: {fillKey: "defaultFill", name: "Lebanon",},
 LBR: {fillKey: "defaultFill", name: "Liberia",},
 LBY: {fillKey: "defaultFill", name: "Libya",},
@@ -135,15 +135,15 @@ LTU: {fillKey: "defaultFill", name: "Lithuania",},
 LUX: {fillKey: "defaultFill", name: "Luxembourg",},
 LVA: {fillKey: "defaultFill", name: "Latvia",},
 MAC: {fillKey: "defaultFill", name: "Macao",},
-MAF: {fillKey: "defaultFill", name: "Saint Martin (French part)",},
+MAF: {fillKey: "defaultFill", name: "Saint Martin",},
 MAR: {fillKey: "defaultFill", name: "Morocco",},
 MCO: {fillKey: "defaultFill", name: "Monaco",},
-MDA: {fillKey: "defaultFill", name: "Moldova, Republic of",},
+MDA: {fillKey: "defaultFill", name: "Moldova",},
 MDG: {fillKey: "defaultFill", name: "Madagascar",},
 MDV: {fillKey: "defaultFill", name: "Maldives",},
 MEX: {fillKey: "defaultFill", name: "Mexico",},
 MHL: {fillKey: "defaultFill", name: "Marshall Islands",},
-MKD: {fillKey: "defaultFill", name: "Macedonia, the former Yugoslav Republic of",},
+MKD: {fillKey: "defaultFill", name: "Macedonia",},
 MLI: {fillKey: "defaultFill", name: "Mali",},
 MLT: {fillKey: "defaultFill", name: "Malta",},
 MMR: {fillKey: "defaultFill", name: "Myanmar",},
@@ -180,10 +180,10 @@ PLW: {fillKey: "defaultFill", name: "Palau",},
 PNG: {fillKey: "defaultFill", name: "Papua New Guinea",},
 POL: {fillKey: "defaultFill", name: "Poland",},
 PRI: {fillKey: "defaultFill", name: "Puerto Rico",},
-PRK: {fillKey: "defaultFill", name: "Korea, Democratic People\'s Republic of",},
+PRK: {fillKey: "defaultFill", name: "Korea",},
 PRT: {fillKey: "defaultFill", name: "Portugal",},
 PRY: {fillKey: "defaultFill", name: "Paraguay",},
-PSE: {fillKey: "defaultFill", name: "Palestine, State of",},
+PSE: {fillKey: "defaultFill", name: "Palestine",},
 PYF: {fillKey: "defaultFill", name: "French Polynesia",},
 QAT: {fillKey: "defaultFill", name: "Qatar",},
 REU: {fillKey: "defaultFill", name: "Réunion",},
@@ -227,8 +227,8 @@ TTO: {fillKey: "defaultFill", name: "Trinidad and Tobago",},
 TUN: {fillKey: "defaultFill", name: "Tunisia",},
 TUR: {fillKey: "defaultFill", name: "Turkey",},
 TUV: {fillKey: "defaultFill", name: "Tuvalu",},
-TWN: {fillKey: "defaultFill", name: "Taiwan, Province of China",},
-TZA: {fillKey: "defaultFill", name: "Tanzania, United Republic of",},
+TWN: {fillKey: "defaultFill", name: "Taiwan",},
+TZA: {fillKey: "defaultFill", name: "Tanzania",},
 UGA: {fillKey: "defaultFill", name: "Uganda",},
 UKR: {fillKey: "defaultFill", name: "Ukraine",},
 UMI: {fillKey: "defaultFill", name: "United States Minor Outlying Islands",},
@@ -237,9 +237,9 @@ USA: {fillKey: "defaultFill", name: "United States"},
 UZB: {fillKey: "defaultFill", name: "Uzbekistan",},
 VAT: {fillKey: "defaultFill", name: "Holy See (Vatican City State)",},
 VCT: {fillKey: "defaultFill", name: "Saint Vincent and the Grenadines",},
-VEN: {fillKey: "defaultFill", name: "Venezuela, Bolivarian Republic of",},
-VGB: {fillKey: "defaultFill", name: "Virgin Islands, British",},
-VIR: {fillKey: "defaultFill", name: "Virgin Islands, U.S.",},
+VEN: {fillKey: "defaultFill", name: "Venezuela",},
+VGB: {fillKey: "defaultFill", name: "British Virgin Islands",},
+VIR: {fillKey: "defaultFill", name: "US Virgin Islands",},
 VNM: {fillKey: "defaultFill", name: "Viet Nam",},
 VUT: {fillKey: "defaultFill", name: "Vanuatu",},
 WLF: {fillKey: "defaultFill", name: "Wallis and Futuna",},
@@ -253,66 +253,64 @@ ZWE: {fillKey: "defaultFill", name: "Zimbabwe",},
 
 var mapElement = document.getElementById('map');
 if (mapElement) {
-  $(window).on('resize', function() {
-   map.resize();
-  });
   $.post('//localhost:3000/users').then(function (response) {
-    var countries = Datamap.prototype.worldTopo.objects.world.geometries;
     var defaultData = {};
-    console.log(countries, response.body);
     response.body.forEach(function (user) {
-      for (var i = 0; i < countries.length; i++) {
-        defaultData[countries[i].id] = defaultData[countries[i].id] || {fillKey: "defaultFill", name: countries[i].properties.name}
-        if (user.country === countries[i].properties.name) {
-          defaultData[countries[i].id].value = defaultData[countries[i].id].value + 1 || 1
+      for (var country in countries) {
+        if (countries.hasOwnProperty(country)) {
+          defaultData[country] = defaultData[country] || countries[country]
+          if (user.country === defaultData[country].name) {
+            defaultData[country].value = defaultData[country].value + 1 || 1
+            if (defaultData[country].value > 2 && defaultData[country].value < 6) {
+              defaultData[country].fillKey = "medium"
+            } else if (defaultData[country].value > 5) {
+              defaultData[country].fillKey = "high"
+            } else {
+              defaultData[country].fillKey = "low"
+            }
+          }
         }
       }
     })
-    console.log("what have i done?!", defaultData, countries);
     var map = new Datamap({
       element: mapElement,
       projection: 'mercator',
       responsive: true,
       fills: {
         defaultFill: "#A39BA8",
-        authorHasTraveledTo: "#B8C5D6",
-        highlightFillColor: "#B8C5D6"
+        low: "#B8C5D6",
+        medium: "#747b83",
+        high: "#3c4045",
       },
       done: datamap => {
         datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
           window.location.href = '/search?country=' + geography.properties.name.replace(/ /g, "-").toLowerCase()
         });
       },
-      data: {
-        USA: { fillKey: "authorHasTraveledTo" },
-        JPN: { fillKey: "authorHasTraveledTo" },
-        ITA: { fillKey: "authorHasTraveledTo" },
-        CRI: { fillKey: "authorHasTraveledTo" },
-        KOR: { fillKey: "authorHasTraveledTo" },
-        DEU: { fillKey: "authorHasTraveledTo" },
-      },
+      data: defaultData,
       geographyConfig: {
         highlightBorderColor: '#7d7d7d',
         highlightBorderWidth: 1,
         popupTemplate: (geo, data) => {
-            if (!data) {
-              data = {llamas: 0}
+            if (!data.value) {
+              data.value = 0;
               var llama = "llamas"
+            } else if (data.value == 1){
+              var llama = "llama"
             } else {
-              if (data.llamas == 1) {
-                var llama = "llama"
-              } else {
-                var llama = "llamas"
-              }
+              var llama = "llamas"
             }
             return ['<div class="hoverinfo"><strong>',
               geo.properties.name, "<br>", data.llamas,
-                ' ', llama,
+                data.value, " ", llama,
                 '</strong></div>'].join('');
         }
       }
     });
   })
+  $(window).on('resize', function() {
+   map.resize();
+  });
 }
 
 var personalMapElement = document.getElementById('personalMap');
