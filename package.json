@@ -27,6 +27,7 @@
     "mongoskin": "^2.0.0",
     "monk": "^1.0.1",
     "morgan": "~1.5.3",
+    "multer": "^1.0.6",
     "passport": "^0.3.0",
     "passport-facebook": "^2.0.0",
     "passport-linkedin-oauth2": "^1.2.1",

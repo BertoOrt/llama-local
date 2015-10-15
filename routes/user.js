@@ -3,6 +3,10 @@ var router = express.Router();
 var db = require('./../connection');
 var Users = db.get('users');
 var World = db.get('world');
+var multer = require('multer');
+var path = require('path');
+var dest = path.join(__dirname, './../public/images/')
+var upload = multer({ dest: dest});
 
 router.post('/info', function(req, res, next) {
   var id = req.body.id
@@ -134,6 +138,19 @@ router.post('/addReview', function (req, res, next) {
         })
       }
     })
+  })
+})
+
+router.post('/upload', upload.single('image'), function(req, res, next) {
+  var id = req.body.id;
+  Users.update({_id: id}, {$set: {profileImage: req.file.filename}}).then(function () {
+    res.redirect('//localhost:8080/' + id)
+  })
+})
+
+router.get('/:id/image', function (req, res, next) {
+  Users.findOne({_id: req.params.id}).then(function (user) {
+    res.sendFile(path.join(dest, user.profileImage))
   })
 })
 

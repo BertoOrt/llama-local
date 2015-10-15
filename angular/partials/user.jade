@@ -2,7 +2,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
 .ui.left.sidebar.vertical.menu
   .ui.vertical.fluid.tabular.menu
     .profile
-      .profileImage
+      img.profileImage(src="http://orig08.deviantart.net/b97a/f/2013/045/1/e/profile_picture_by_llama_giver_123-d5uwh54.jpg")
     h3 {{user.name}}
     a.item.active(ng-click="sidebar()" data-tab="bio")
       i.user.icon
@@ -34,7 +34,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
   .four.wide.computer.column
     .ui.vertical.fluid.tabular.menu.fullScreen
       .profile
-        .profileImage
+        img.profileImage(ng-src="{{user.profile}}")
       h3.profileName {{user.name}}
       a.item.active(ng-mouseover="tab()" data-tab="bio")
         i.user.icon
@@ -314,18 +314,29 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
         .header
           | Success!
         p Your Package has been saved
-      h1 Preferences
-      form(name="urlForm")
-        .ui.labeled.input
-          .ui.label
-            | http://development.llama-local.divshot.io/
-          input(type='text' name="url" ng-model="url" required)
-        button.ui.button.changeButton.purple(type="submit" ng-disabled="urlForm.$invalid" ng-click="changeUrl()")
-          | Change
-        .taken.error(ng-show="taken")
-          | Name already taken
       h1 Edit
       .ui.styled.accordion
+        .title.preferenceTab
+          i.dropdown.icon
+          |     Preferences
+        .content
+          .transition.visitble
+            h3 Url
+            form(name="urlForm")
+              .ui.labeled.input
+                .ui.label
+                  | http://development.llama-local.divshot.io/
+                input(type='text' name="url" ng-model="url" required)
+              button.ui.button.changeButton.purple(type="submit" ng-disabled="urlForm.$invalid" ng-click="changeUrl()")
+                | Change
+              .taken.error(ng-show="taken")
+                | Name already taken
+            h3 Profile
+            form(action='//localhost:3000/user/upload' method="post" enctype='multipart/form-data').ui.reply.form
+              .field
+                input.hide(type="text" name="id" ng-model="user.id")
+                input(type='file' name="image")
+              button.ui.button.purple(type='submit') Upload!
         .title.bioTab
           i.dropdown.icon
           |     Bio
