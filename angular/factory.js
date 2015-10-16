@@ -21,19 +21,22 @@ app.factory('AuthUser', ['$http', '$location', 'ipCookie', '$q', function ($http
     $location.path('/')
   };
   authuser.login = function (data) {
+    var promise = $q.defer();
     $http.post('//localhost:3000/login', data)
       .success(function (response, stat) {
+        console.log(response);
         if (response.status == "ok") {
           $('.ui.modal').modal('hide all');
           ipCookie('user', response.id)
           $location.path('/'+ response.id)
         } else {
-          return true
+          return promise.resolve(true);
         }
       })
       .error(function (data) {
         $location.path('/error')
       })
+    return promise.promise;
   };
   authuser.check = function () {
     var cookie = ipCookie('user')

@@ -506,7 +506,7 @@ ZWE: {fillKey: "defaultFill", name: "Zimbabwe",},
 
 var mapElement = document.getElementById('map');
 if (mapElement) {
-  $.post('//localhost:3000/users').then(function (response) {
+  $.get('//localhost:3000/users').then(function (response) {
     var defaultData = {};
     response.body.forEach(function (user) {
       for (var country in countries) {

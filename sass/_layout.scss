@@ -236,7 +236,12 @@ h3.mapTitle {
   border-radius: 10px;
   padding: 4%;
   box-shadow: 0 0 15px 1px;
-  overflow: hidden;
+  overflow: scroll;
+  .text {
+    background: rgba($pri, .1);
+    border-radius: 5px;
+    padding: 3%;
+  }
 }
 
 #particles-js {
@@ -258,12 +263,6 @@ h3.mapTitle {
 
 .hide {
   display: none;
-}
-
-.text {
-  background: rgba($pri, .1);
-  border-radius: 5px;
-  padding: 3%;
 }
 
 .questionText {

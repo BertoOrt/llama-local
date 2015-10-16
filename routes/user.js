@@ -154,4 +154,13 @@ router.get('/:id/image', function (req, res, next) {
   })
 })
 
+router.post('/share', function (req, res, next) {
+  console.log(req.body);
+//   var tokenUrl = 'https://graph.facebook.com/v2.4/oauth/access_token?client_id='+clientID+'&client_secret='+clientSecret+'&grant_type=client_credentials'
+//
+// Barry Bankhead [3:21 PM]
+// var friendsListUrl = 'https://graph.facebook.com/v2.4/'+profile.id+'/friends?access_token='+token.body.access_token+"&redirect=false"
+//        var getFbProfilePic = 'https://graph.facebook.com/v2.4/'+profile.id+'/?fields=picture&redirect=false&access_token='+token.body.access_token
+})
+
 module.exports = router;

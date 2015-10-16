@@ -34,7 +34,11 @@ h1.mapTitle Find A Llama
         h4 ... one Llama at a time
     .centered
       br
-      h4.questionText Questions?
+      h1(ng-show="emailSent") Thank you!
+      h1(ng-show="emailError") Oops, it didn't work
+      br(ng-show="emailSent")
+      h4.questionText(ng-hide="emailSent") Questions?
+      h4.questionText(ng-show="emailSent") More Questions?
       img.littleLlama.emailModal(src="/images/llama.gif" ng-click="email()")
 .footer
   .container
@@ -80,17 +84,17 @@ h1.mapTitle Find A Llama
   .header
     | Send Us An Email
   .content
-    .ui.form
+    form(name='contactForm').ui.form
       .field
-        input(type='email' placeholder="Your Email")
+        input(type='email' placeholder="Your Email" ng-model="contactEmail" required)
       .field
-        input(type='text' placeholder="Subject")
+        input(type='text' placeholder="Subject" ng-model="contactSubject" required)
       .field
-        textarea(placeholder="Go ahead, let it all out...")
+        textarea(placeholder="Go ahead, let it all out..." ng-model="contactBody" ng-minlength="10" required)
   .actions
     .ui.black.deny.button
       | Nevermind
-    .ui.positive.right.labeled.icon.button
+    button.ui.positive.right.labeled.icon.button(ng-disabled="contactForm.$invalid" ng-click='sendMail()')
       | Send
       i.checkmark.icon
 script(src='/map/allmap.min.js')

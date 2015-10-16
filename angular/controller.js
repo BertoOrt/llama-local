@@ -10,11 +10,28 @@ app.controller('home', ['$scope', '$http', '$location', 'AuthUser', 'ipCookie', 
     var data = {email: $scope.loginEmail, password: $scope.loginPassword};
     var result = AuthUser.login(data);
     if (result) {
+      $scope.loginSubmitted = false;
       $scope.invalidPassword = true;
     }
   };
   $scope.email = function () {
     $('.ui.modal.email').modal('show');
+  }
+  $scope.sendMail = function () {
+    var data = {from: $scope.contactEmail, subject: $scope.contactSubject, body: $scope.contactBody}
+    $scope.emailError = false;
+    $scope.emailSent = false;
+    $http.post('//localhost:3000/mail', data)
+      .success(function (response) {
+        if (response.message == "success") {
+          $scope.emailSent = true;
+        } else {
+          $scope.emailError = true;
+        }
+      })
+      .error(function () {
+        $scope.emailError = true;
+      })
   }
 }])
 
@@ -55,7 +72,7 @@ app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser'
 app.controller('search', ['$scope', 'AuthUser', '$http', '$location', function ($scope, AuthUser, $http, $location) {
   $scope.loggedIn = AuthUser.check()
   $scope.search = $location.search().country
-  $http.post('//localhost:3000/users')
+  $http.get('//localhost:3000/users')
     .success(function (response) {
       console.log(response);
       var search = $location.search().country.toLowerCase().split(' ')[0]
@@ -98,9 +115,10 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         $scope.user.language = response.body.language
         $scope.user.packages = response.body.packages
         $scope.user.reviews = response.body.reviews
+        $scope.user.facebookId = response.body.facebookId
         $scope.user.profile = 'http://orig08.deviantart.net/b97a/f/2013/045/1/e/profile_picture_by_llama_giver_123-d5uwh54.jpg'
         if (response.body.profileImage) {
-          $scope.user.profile = '//localhost:3000/user/' + $scope.user.id + '/image'
+          $scope.user.profile = '//localhost:3000/user/' + response.body._id + '/image'
         }
         if (!$scope.user.packages) {
           $scope.noPackages = true;
@@ -249,5 +267,8 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
       .error(function (data) {
         $location.path('/error')
       })
+  }
+  $scope.share = function () {
+    console.log('sharing!');
   }
 }])
