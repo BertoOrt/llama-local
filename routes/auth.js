@@ -11,7 +11,6 @@ router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_f
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: 'http://development.llama-local.divshot.io/error'}), function (req, res) {
   Users.findOne({facebookId: req.user.id}).then(function (userData) {
     if (!userData) {
-      console.log('not here');
       Users.insert({facebookId: req.user.id, headline: "Bienvenido!", facebookToken: req.user.token,
        about: "I'm a new llama. Click settings to edit info.", language: "English", country: "United States", name: req.user.displayName}).then(function (data) {
         var id = data._id.toString()

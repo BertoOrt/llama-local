@@ -775,12 +775,9 @@
                     .error(ng-show="password !== confirm && signupForm.password.$valid ") Passwords Must Match
         hr
         .oauth
-          .ui.facebook.button
+          a.ui.facebook.button(href="https://arcane-castle-8723.herokuapp.com/auth/facebook")
             i.facebook.icon
             |         Facebook
-          .ui.instagram.button
-            i.instagram.icon
-            |         Instagram
 .ui.basic.modal.signup
   .header
     | Log in
