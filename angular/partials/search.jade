@@ -15,6 +15,6 @@
       .ui.massive.aligned.animated.list
         .item(ng-repeat="user in users")
           a(ng-href="/{{user._id}}")
-            img.ui.avatar.image(src='http://orig08.deviantart.net/b97a/f/2013/045/1/e/profile_picture_by_llama_giver_123-d5uwh54.jpg')
+            img.ui.avatar.image(ng-src='{{user.profile}}')
             .content
               .header {{user.name}}

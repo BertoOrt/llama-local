@@ -22,10 +22,14 @@
 .profileImage {
   width: 200px;
   height: 200px;
-  margin: 1em auto;
   background-size: cover;
   border-radius: 10px;
   border: 3px solid $cuar;
+}
+
+.profileDiv {
+  width: 200px;
+  margin: 1em auto;
 }
 
 .givenBadge {
@@ -50,4 +54,9 @@
   position: absolute;
   left: 20px;
   top: 40px;
+}
+
+.littleLlama {
+  width: 40px;
+  height: 40px;
 }

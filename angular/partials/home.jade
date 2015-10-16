@@ -28,11 +28,14 @@ h1.mapTitle Find A Llama
 #map
 #particles-js
   .contact
-    h2 Let's connect the world...
-    h4.rightText ... one Llama at a time
+    .text
+      h2 Let's connect the world...
+      .rightText
+        h4 ... one Llama at a time
     .centered
-      p Contact Us!
-      i.mail.icon.big.emailModal(ng-click="email()")
+      br
+      h4.questionText Questions?
+      img.littleLlama.emailModal(src="/images/llama.gif" ng-click="email()")
 .footer
   .container
     .footerNav
@@ -79,7 +82,7 @@ h1.mapTitle Find A Llama
   .content
     .ui.form
       .field
-        input(type='email' placeholder="Email")
+        input(type='email' placeholder="Your Email")
       .field
         input(type='text' placeholder="Subject")
       .field
