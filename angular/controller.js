@@ -103,8 +103,9 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   $scope.taken = false;
   $scope.newPackage = false;
   $scope.isChecked = 1;
-  $scope.user = {id: ipCookie('user')}
-  $http.post('//localhost:3000/user/info', {id: $scope.user.id, url: $location.path().substring(1)})
+  $scope.user = {id: ipCookie('user')};
+  $scope.url = $location.path().substring(1);
+  $http.post('//localhost:3000/user/info', {id: $scope.user.id, url: $scope.url})
     .success(function (response, stat) {
       if (response.status == "ok") {
         $scope.user.name = response.body.name
@@ -116,6 +117,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         $scope.user.packages = response.body.packages
         $scope.user.reviews = response.body.reviews
         $scope.user.facebookId = response.body.facebookId
+        $scope.user.facebookToken = response.body.facebookToken
         $scope.user.profile = 'http://orig08.deviantart.net/b97a/f/2013/045/1/e/profile_picture_by_llama_giver_123-d5uwh54.jpg'
         if (response.body.profileImage) {
           $scope.user.profile = '//localhost:3000/user/' + response.body._id + '/image'
@@ -269,6 +271,20 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
       })
   }
   $scope.share = function () {
-    console.log('sharing!');
+    $scope.shareSuccess = false;
+    $scope.shareError = false;
+    $http.post('//localhost:3000/user/share', {id: $scope.user.facebookId, token: $scope.user.facebookToken, url: $location.path().substring(1)})
+      .success(function (response) {
+        console.log(response);
+        if (response.status == "ok") {
+          $scope.shareSuccess = true;
+        } else {
+          $scope.shareError = true;
+        }
+      })
+      .error(function () {
+        console.log('errror');
+        $scope.shareError = true;
+      })
   }
 }])

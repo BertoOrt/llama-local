@@ -6,7 +6,7 @@ var Users = db.get('users');
 var World = db.get('world');
 var passport = require('passport');
 
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'public_profile', 'email']}));
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'public_profile', 'publish_actions', 'email']}));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: '//localhost:8080/error'}), function (req, res) {
   Users.findOne({facebookId: req.user.id}).then(function (userData) {

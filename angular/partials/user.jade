@@ -71,7 +71,12 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
           h2 {{user.headline}}
           button.ui.mini.button.facebook(ng-show="owner && user.facebookId" ng-click="share()")
             i.facebook.icon
-            | Share
+            div.share(ng-hide="shareSuccess || shareError")
+              | Share
+            div.share(ng-show="shareSuccess")
+              | Shared!!
+            div.share(ng-show="shareError")
+              | Not Shared :(
         .row
           .sixteen.wide.column.profile
             table

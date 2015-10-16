@@ -7,6 +7,7 @@ var multer = require('multer');
 var path = require('path');
 var dest = path.join(__dirname, './../public/images/')
 var upload = multer({ dest: dest});
+var unirest = require('unirest');
 
 router.post('/info', function(req, res, next) {
   var id = req.body.id
@@ -155,12 +156,12 @@ router.get('/:id/image', function (req, res, next) {
 })
 
 router.post('/share', function (req, res, next) {
-  console.log(req.body);
-//   var tokenUrl = 'https://graph.facebook.com/v2.4/oauth/access_token?client_id='+clientID+'&client_secret='+clientSecret+'&grant_type=client_credentials'
-//
-// Barry Bankhead [3:21 PM]
-// var friendsListUrl = 'https://graph.facebook.com/v2.4/'+profile.id+'/friends?access_token='+token.body.access_token+"&redirect=false"
-//        var getFbProfilePic = 'https://graph.facebook.com/v2.4/'+profile.id+'/?fields=picture&redirect=false&access_token='+token.body.access_token
+  var message = "API TEST-- Check out my new site! http://path/" + req.body.url
+  var shareUrl = 'https://graph.facebook.com/v2.4/' + req.body.id + '/feed?message=' + message + '&access_token=' + req.body.token
+  unirest.post(shareUrl)
+    .end(function (response) {
+      res.json({status: "ok"})
+  });
 })
 
 module.exports = router;

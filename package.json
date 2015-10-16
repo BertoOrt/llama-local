@@ -32,6 +32,7 @@
     "passport-facebook": "^2.0.0",
     "passport-linkedin-oauth2": "^1.2.1",
     "sendgrid": "^1.9.2",
-    "serve-favicon": "~2.2.1"
+    "serve-favicon": "~2.2.1",
+    "unirest": "^0.4.2"
   }
 }
