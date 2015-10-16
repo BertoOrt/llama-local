@@ -26,7 +26,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
     a.item(ng-show="owner" ng-click="sidebar()" data-tab="settings")
       i.settings.icon
       | Settings
-    a.item(ng-show="loggedIn" href="//localhost:3000/logout")
+    a.item(ng-show="loggedIn" href="https://arcane-castle-8723.herokuapp.com/logout")
       i.reply.icon
       | Logout
     a(href='/')
@@ -59,7 +59,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
       a.item(ng-show="owner" ng-mouseover="tab()" data-tab="settings")
         i.settings.icon
         | Settings
-      a.item(ng-show="loggedIn" ng-click="logout()" href="//localhost:3000/logout") 
+      a.item(ng-show="loggedIn" ng-click="logout()" href="https://arcane-castle-8723.herokuapp.com/logout") 
         i.reply.icon
         | Logout
       a(href='/')
@@ -342,7 +342,7 @@ button.collapsedMenu(ng-click="sidebar()") &#9776;
               .taken.error(ng-show="taken")
                 | Name already taken
             h3 Profile
-            form(action='//localhost:3000/user/upload' method="post" enctype='multipart/form-data').ui.reply.form
+            form(action='https://arcane-castle-8723.herokuapp.com/user/upload' method="post" enctype='multipart/form-data').ui.reply.form
               .field
                 input.hide(type="text" name="id" ng-model="user.id")
                 input(type='file' name="image")

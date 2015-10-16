@@ -506,7 +506,7 @@ ZWE: {fillKey: "defaultFill", name: "Zimbabwe",},
 
 var mapElement = document.getElementById('map');
 if (mapElement) {
-  $.get('//localhost:3000/users').then(function (response) {
+  $.get('https://arcane-castle-8723.herokuapp.com/users').then(function (response) {
     var defaultData = {};
     response.body.forEach(function (user) {
       for (var country in countries) {
@@ -571,7 +571,7 @@ var personalMapElement = document.getElementById('personalMap');
 if (personalMapElement) {
   var id = $.cookie('user');
   var url = window.location.pathname.substring(1)
-  $.post('//localhost:3000/user/world', {id, url}).then(function (data) {
+  $.post('https://arcane-castle-8723.herokuapp.com/user/world', {id, url}).then(function (data) {
     var defaultData = personalCountries;
     var fillIndex = {
       "1": "authorHasTraveledTo",
@@ -604,7 +604,7 @@ if (personalMapElement) {
           if (defaultData[geography.id].value > 4) {
             defaultData[geography.id].value = 1;
           }
-          $.post('//localhost:3000/user/update/world', {id: id, country: geography.id, value: defaultData[geography.id].value}).then(function (data) {
+          $.post('https://arcane-castle-8723.herokuapp.com/user/update/world', {id: id, country: geography.id, value: defaultData[geography.id].value}).then(function (data) {
             defaultData[geography.id].fillKey = fillIndex[String((defaultData[geography.id].value))];
             personalMap.updateChoropleth(defaultData);
             personalMap.resize()

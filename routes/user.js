@@ -145,7 +145,7 @@ router.post('/addReview', function (req, res, next) {
 router.post('/upload', upload.single('image'), function(req, res, next) {
   var id = req.body.id;
   Users.update({_id: id}, {$set: {profileImage: req.file.filename}}).then(function () {
-    res.redirect('//localhost:8080/' + id)
+    res.redirect('http://development.llama-local.divshot.io/' + id)
   })
 })
 

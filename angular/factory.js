@@ -2,7 +2,7 @@ app.factory('AuthUser', ['$http', '$location', 'ipCookie', '$q', function ($http
   var authuser = {};
   authuser.signup = function (data) {
     var deferred = $q.defer()
-    $http.post('//localhost:3000/signup', data)
+    $http.post('https://arcane-castle-8723.herokuapp.com/signup', data)
       .success(function (response, stat) {
         if (response.status == "ok") {
           ipCookie('user', response.id);
@@ -22,7 +22,7 @@ app.factory('AuthUser', ['$http', '$location', 'ipCookie', '$q', function ($http
   };
   authuser.login = function (data) {
     var promise = $q.defer();
-    $http.post('//localhost:3000/login', data)
+    $http.post('https://arcane-castle-8723.herokuapp.com/login', data)
       .success(function (response, stat) {
         console.log(response);
         if (response.status == "ok") {
@@ -50,7 +50,7 @@ app.factory('AuthUser', ['$http', '$location', 'ipCookie', '$q', function ($http
     var url = $location.path().substring(1);
     var cookie = ipCookie('user');
     var data = {url, cookie};
-    $http.post('//localhost:3000/user/auth', data)
+    $http.post('https://arcane-castle-8723.herokuapp.com/user/auth', data)
       .success(function (response, stat) {
         if (response.status == "ok") {
           return promise.resolve(true)

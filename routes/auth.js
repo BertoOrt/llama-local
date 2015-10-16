@@ -8,7 +8,7 @@ var passport = require('passport');
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'public_profile', 'publish_actions', 'email']}));
 
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: '//localhost:8080/error'}), function (req, res) {
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect: 'http://development.llama-local.divshot.io/error'}), function (req, res) {
   Users.findOne({facebookId: req.user.id}).then(function (userData) {
     if (!userData) {
       console.log('not here');
@@ -17,12 +17,12 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {failure
         var id = data._id.toString()
         res.cookie('user', id);
         World.insert({userId: id}).then(function () {
-          res.redirect('//localhost:8080/' + id)
+          res.redirect('http://development.llama-local.divshot.io/' + id)
         })
       });
     } else {
       res.cookie('user', String(userData._id));
-      res.redirect('//localhost:8080/' + userData._id.toString())
+      res.redirect('http://development.llama-local.divshot.io/' + userData._id.toString())
     }
   })
 });
@@ -67,7 +67,7 @@ router.post('/login', function(req, res, next) {
 
 router.get('/logout', function (req, res, next) {
   req.session = null
-  res.redirect('//localhost:8080/')
+  res.redirect('http://development.llama-local.divshot.io/')
 })
 
 module.exports = router;

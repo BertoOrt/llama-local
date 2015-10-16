@@ -21,7 +21,7 @@ app.controller('home', ['$scope', '$http', '$location', 'AuthUser', 'ipCookie', 
     var data = {from: $scope.contactEmail, subject: $scope.contactSubject, body: $scope.contactBody}
     $scope.emailError = false;
     $scope.emailSent = false;
-    $http.post('//localhost:3000/mail', data)
+    $http.post('https://arcane-castle-8723.herokuapp.com/mail', data)
       .success(function (response) {
         if (response.message == "success") {
           $scope.emailSent = true;
@@ -72,7 +72,7 @@ app.controller('signup', ['$scope', '$http', '$location', 'ipCookie', 'AuthUser'
 app.controller('search', ['$scope', 'AuthUser', '$http', '$location', function ($scope, AuthUser, $http, $location) {
   $scope.loggedIn = AuthUser.check()
   $scope.search = $location.search().country
-  $http.get('//localhost:3000/users')
+  $http.get('https://arcane-castle-8723.herokuapp.com/users')
     .success(function (response) {
       console.log(response);
       var search = $location.search().country.toLowerCase().split(' ')[0]
@@ -81,7 +81,7 @@ app.controller('search', ['$scope', 'AuthUser', '$http', '$location', function (
         if (user.country && user.country.toLowerCase().indexOf(search) > -1) {
           user.profile = 'http://orig08.deviantart.net/b97a/f/2013/045/1/e/profile_picture_by_llama_giver_123-d5uwh54.jpg'
           if (user.profileImage) {
-            user.profile = '//localhost:3000/user/' + user._id + '/image'
+            user.profile = 'https://arcane-castle-8723.herokuapp.com/user/' + user._id + '/image'
           }
           $scope.users.push(user)
         }
@@ -105,7 +105,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   $scope.isChecked = 1;
   $scope.user = {id: ipCookie('user')};
   $scope.url = $location.path().substring(1);
-  $http.post('//localhost:3000/user/info', {id: $scope.user.id, url: $scope.url})
+  $http.post('https://arcane-castle-8723.herokuapp.com/user/info', {id: $scope.user.id, url: $scope.url})
     .success(function (response, stat) {
       if (response.status == "ok") {
         $scope.user.name = response.body.name
@@ -120,7 +120,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
         $scope.user.facebookToken = response.body.facebookToken
         $scope.user.profile = 'http://orig08.deviantart.net/b97a/f/2013/045/1/e/profile_picture_by_llama_giver_123-d5uwh54.jpg'
         if (response.body.profileImage) {
-          $scope.user.profile = '//localhost:3000/user/' + response.body._id + '/image'
+          $scope.user.profile = 'https://arcane-castle-8723.herokuapp.com/user/' + response.body._id + '/image'
         }
         if (!$scope.user.packages) {
           $scope.noPackages = true;
@@ -168,7 +168,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
       $scope.user.country = country
     };
     $scope.sendingInfo = true;
-    $http.post('//localhost:3000/user/editInfo', $scope.user)
+    $http.post('https://arcane-castle-8723.herokuapp.com/user/editInfo', $scope.user)
       .success(function (response, stat) {
         $scope.sendingInfo = false;
         if (response.status == "ok") {
@@ -189,7 +189,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
     $scope.sendingInfo = true;
     $scope.noPackages = false;
     $scope.user.packages.push($scope.package);
-    $http.post('//localhost:3000/user/package', {id: ipCookie('user'), package: $scope.package})
+    $http.post('https://arcane-castle-8723.herokuapp.com/user/package', {id: ipCookie('user'), package: $scope.package})
       .success(function (response, stat) {
         $scope.sendingInfo = false;
         if (response.status == "ok") {
@@ -208,7 +208,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   }
   $scope.changeUrl = function () {
     var data = {id:ipCookie('user'), url: $scope.url}
-    $http.post('//localhost:3000/user/url', data)
+    $http.post('https://arcane-castle-8723.herokuapp.com/user/url', data)
       .success(function (response) {
         if (response.status == "ok") {
           $location.path('/' + response.reference)
@@ -221,7 +221,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
       })
   };
   $scope.editPackage = function () {
-    $http.post('//localhost:3000/user/editPackage', {id: ipCookie('user'), package: this.package})
+    $http.post('https://arcane-castle-8723.herokuapp.com/user/editPackage', {id: ipCookie('user'), package: this.package})
       .success(function (response, stat) {
         $scope.sendingInfo = false;
         if (response.status == "ok") {
@@ -243,7 +243,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   }
   $scope.removePackage = function (i) {
     $scope.user.packages.splice(i, 1);
-    $http.post('//localhost:3000/user/removePackage', {id: ipCookie('user'), package: this.package})
+    $http.post('https://arcane-castle-8723.herokuapp.com/user/removePackage', {id: ipCookie('user'), package: this.package})
       .success(function (response, stat) {
         $scope.sendingInfo = false;
         if (response.status == "ok") {
@@ -261,7 +261,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
     $scope.user.reviews.push({badge: $scope.isChecked, review: $scope.reviewText, by: ipCookie('user'), byName: 'You!'})
     console.log('submitted', $scope.isChecked, $scope.reviewText);
     $scope.noReviews = false;
-    $http.post('//localhost:3000/user/addReview', {id: ipCookie('user'), reference: $location.path().substring(1), badge: $scope.isChecked, review: $scope.reviewText})
+    $http.post('https://arcane-castle-8723.herokuapp.com/user/addReview', {id: ipCookie('user'), reference: $location.path().substring(1), badge: $scope.isChecked, review: $scope.reviewText})
       .success(function (response) {
         $scope.isChecked = '';
         $scope.reviewText = '';
@@ -273,7 +273,7 @@ app.controller('user', ['$scope', '$http', 'ipCookie','$location', 'AuthUser', f
   $scope.share = function () {
     $scope.shareSuccess = false;
     $scope.shareError = false;
-    $http.post('//localhost:3000/user/share', {id: $scope.user.facebookId, token: $scope.user.facebookToken, url: $location.path().substring(1)})
+    $http.post('https://arcane-castle-8723.herokuapp.com/user/share', {id: $scope.user.facebookId, token: $scope.user.facebookToken, url: $location.path().substring(1)})
       .success(function (response) {
         console.log(response);
         if (response.status == "ok") {
